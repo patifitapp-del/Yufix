@@ -31,7 +31,7 @@ import {
 export const DATA = {
   // Giriş Bilgileri
   name: "YUSUF TALIBOV",
-  title: "Uygulama geliştiricisi. Yufix'in kurucusu.",
+  title: "Uygulama geliştiricisi. Yufixuz Studio kurucusu.",
   
   // Profil Fotoğrafı:
   // Kendi fotoğrafınızın URL'sini veya dosya yolunu buraya yapıştırabilirsiniz.
@@ -41,7 +41,7 @@ export const DATA = {
   // Hakkımda Metni
   about: [
     "Merhaba, ben Yusuf Talibov; 15 yaşındayım. Yaklaşık 2 yıldır yazılım, kodlama ve yapay zeka ile aktif olarak ilgileniyorum ve 14 yaşımda ilk uygulamamı geliştirdim. Hiçbir kursa gitmeden, tamamen kendi kendime araştırıp öğrenerek kod yazıyorum; yapay zekayı en verimli şekilde kullanarak App Store uygulamaları ve modern web sitesi tasarımları yapıyorum.",
-    "Şu anda stüdyom Yufix çatısı altında 4 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit neredeyse yayınlanmak üzere (hemen aşağıdan detaylarını inceleyebilirsiniz). Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
+    "Şu anda stüdyom Yufixuz Studio çatısı altında 4 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit neredeyse yayınlanmak üzere (hemen aşağıdan detaylarını inceleyebilirsiniz). Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
     "Bir yandan yazılım geliştirirken bir yandan sporumu aksatmıyor, okul derslerimi başarıyla sürdürüyorum. Tüm bu disiplini ve projelerimi elbette her an yanımda olan ailemin desteği sayesinde hayata geçiriyorum."
   ],
   
@@ -105,7 +105,7 @@ export const DATA = {
     },
     {
       year: "2026",
-      text: "Yufix stüdyosunu kurdum."
+      text: "Yufixuz Studio'yu kurdum."
     },
     {
       year: "2026",
@@ -139,7 +139,7 @@ export const DATA = {
     },
     {
       name: "Facebook",
-      handle: "Yufix",
+      handle: "Yufixuz Studio",
       url: "https://www.facebook.com/share/19hcLc1DG2/?mibextid=wwXIfr",
       icon: "facebook"
     },
@@ -152,7 +152,7 @@ export const DATA = {
   ],
   
   // Altbilgi
-  footerText: "© 2026 Yusuf Talibov · Yufix"
+  footerText: "© 2026 Yusuf Talibov · Yufixuz Studio"
 };
 
 // Uygulama ikon haritası (minimalist monokrom çizgiler)
@@ -525,7 +525,7 @@ export default function App() {
                         </a>
                       ) : (
                         <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#777777] border-t border-[#0A0A0A]/20">
-                          <span>iOS / Yufix</span>
+                          <span>iOS / Yufixuz Studio</span>
                           <span>{app.status}</span>
                         </div>
                       )}
