@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { EMBLEM_DATA_URI } from './assets/emblem';
 import {
   Dumbbell,
   Clock,
@@ -32,7 +33,7 @@ export const DATA = {
   // Giriş Bilgileri
   name: "YUSUF TALIBOV",
   title: "Uygulama geliştiricisi. Yufixuz Studio kurucusu.",
-  emblem: "/favicon.png",
+  emblem: EMBLEM_DATA_URI,
   
   // Profil Fotoğrafı:
   // Kendi fotoğrafınızın URL'sini veya dosya yolunu buraya yapıştırabilirsiniz.
@@ -220,6 +221,26 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(DATA.photo);
 
+  // Sekme ikonunun (favicon) tarayıcı tarafından anında ve önbelleğe takılmadan algılanması için dinamik bağlama
+  useEffect(() => {
+    try {
+      const links = document.querySelectorAll<HTMLLinkElement>("link[rel*='icon'], link[rel*='apple-touch-icon']");
+      if (links.length > 0) {
+        links.forEach((link) => {
+          link.href = EMBLEM_DATA_URI;
+        });
+      } else {
+        const newLink = document.createElement('link');
+        newLink.rel = 'icon';
+        newLink.type = 'image/png';
+        newLink.href = EMBLEM_DATA_URI;
+        document.head.appendChild(newLink);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   // Filtrelenmiş sosyal medya hesapları (boş linkler gizlenir)
   const activeSocials = DATA.socials.filter(s => Boolean(s.url && s.url.trim() !== ""));
 
@@ -244,7 +265,10 @@ export default function App() {
               <img
                 src={DATA.emblem}
                 alt="Yufixuz Studio"
-                className="w-6 h-6 object-contain border border-[#0A0A0A] bg-[#F5F4F0]"
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/logo.png';
+                }}
               />
             )}
             <span>Yusuf Talibov</span>
@@ -711,7 +735,10 @@ export default function App() {
               <img
                 src={DATA.emblem}
                 alt="Yufixuz Studio"
-                className="w-4 h-4 object-contain border border-[#0A0A0A]/40"
+                className="w-5 h-5 object-contain shrink-0"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/logo.png';
+                }}
               />
             )}
             <span>{DATA.footerText}</span>
