@@ -35,10 +35,8 @@ export const DATA = {
   title: "Uygulama geliştiricisi. Yufixuz Studio kurucusu.",
   emblem: EMBLEM_DATA_URI,
   
-  // Profil Fotoğrafı:
-  // Kendi fotoğrafınızın URL'sini veya dosya yolunu buraya yapıştırabilirsiniz.
-  // Boş bırakılırsa ("") fotoğraf alanı sayfada tamamen gizlenir.
-  photo: "/assets/aistudio/yusuf_studio_bw.jpg",
+  // Profil Fotoğrafı (Kişisel fotoğraf kaldırıldı; boş bırakıldığında stüdyo amblemi kartı görüntülenir)
+  photo: "",
   
   // Hakkımda Metni
   about: [
@@ -219,7 +217,6 @@ function renderSocialIcon(icon: string) {
 export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(DATA.photo);
 
   // Sekme ikonunun (favicon) tarayıcı tarafından anında ve önbelleğe takılmadan algılanması için dinamik bağlama
   useEffect(() => {
@@ -367,7 +364,7 @@ export default function App() {
         <section className="pt-16 sm:pt-24 pb-16 md:pb-24 border-b border-[#0A0A0A]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Sol / Ana Alan: Ekranı kaplayan dev başlık ve açıklama */}
-            <div className={`space-y-8 ${DATA.photo && DATA.photo.trim() !== '' ? 'lg:col-span-8' : 'lg:col-span-12'}`}>
+            <div className="space-y-8 lg:col-span-7 xl:col-span-8">
               <div className="space-y-4">
                 <span className="text-xs uppercase tracking-widest font-mono text-[#555555] block">
                   Portfolyo · 2026
@@ -408,59 +405,87 @@ export default function App() {
               </div>
             </div>
 
-            {/* Sağ Alan: Siyah-Beyaz Fotoğraf (Boşsa tamamen gizlenir) */}
-            {DATA.photo && DATA.photo.trim() !== '' && (
-              <div className="lg:col-span-4 lg:pt-3">
-                <div className="border border-[#0A0A0A] bg-neutral-100 p-2 relative">
-                  <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-200 border border-[#0A0A0A]/40">
+            {/* Sağ Alan: Sade Kimlik ve Bilgi Kartı ("İkinci şey") */}
+            <div className="lg:col-span-5 xl:col-span-4 lg:pt-2">
+              <div className="border border-[#0A0A0A] bg-[#EFECE6] p-6 sm:p-7 relative shadow-[4px_4px_0px_0px_#0A0A0A]">
+                {/* 1. Logo (Amblem) */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#F5F4F0] border border-[#0A0A0A] p-2 flex items-center justify-center shrink-0">
                     <img
-                      src={selectedPhoto}
-                      alt={DATA.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover filter contrast-110 brightness-100"
+                      src={DATA.emblem}
+                      alt="Logo"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
-                        // Resim yüklenemezse zarif bir monokrom görsel kutu göster
-                        e.currentTarget.style.display = 'none';
-                        const fallback = e.currentTarget.parentElement?.querySelector('.photo-fallback');
-                        if (fallback) fallback.classList.remove('hidden');
+                        (e.currentTarget as HTMLImageElement).src = '/assets/aistudio/image_e2250dd1.png';
                       }}
                     />
-                    <div className="photo-fallback hidden w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-200">
-                      <div className="w-12 h-12 border border-[#0A0A0A] flex items-center justify-center font-black text-lg mb-2">
-                        YT
-                      </div>
-                      <span className="text-xs uppercase tracking-wider font-bold">
-                        {DATA.name}
-                      </span>
-                    </div>
                   </div>
-                  <div className="pt-2 px-1 flex items-center justify-between text-[11px] font-mono text-[#555555]">
-                    <span>Geliştirici & Kurucu</span>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedPhoto('/assets/aistudio/yusuf_studio_bw.jpg')}
-                        className={`hover:text-[#0A0A0A] transition-colors cursor-pointer ${
-                          selectedPhoto.includes('bw') ? 'text-[#0A0A0A] font-bold underline' : 'opacity-60'
-                        }`}
-                      >
-                        Siyah-Beyaz
-                      </button>
-                      <span className="opacity-40">/</span>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedPhoto('/assets/aistudio/image_4cff7b7f.png')}
-                        className={`hover:text-[#0A0A0A] transition-colors cursor-pointer ${
-                          !selectedPhoto.includes('bw') ? 'text-[#0A0A0A] font-bold underline' : 'opacity-60'
-                        }`}
-                      >
-                        Renkli
-                      </button>
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#555555] font-bold">
+                    Yufixuz Studio
+                  </span>
+                </div>
+
+                {/* Sadece İstenen 5 Bilgi */}
+                <div className="divide-y divide-[#0A0A0A]/20 text-sm">
+                  {/* İsim Soyisim */}
+                  <div className="pb-3">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                      İsim Soyisim
+                    </span>
+                    <span className="text-base sm:text-lg font-black tracking-tight text-[#0A0A0A]">
+                      Yusuf Talibov
+                    </span>
+                  </div>
+
+                  {/* Yaş */}
+                  <div className="py-2.5">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                      Yaş
+                    </span>
+                    <span className="text-sm sm:text-base font-bold font-mono text-[#0A0A0A]">
+                      15
+                    </span>
+                  </div>
+
+                  {/* Meslek */}
+                  <div className="py-2.5">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                      Meslek
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">
+                      Bağımsız Yazılım ve Mobil Uygulama Geliştiricisi
+                    </span>
+                  </div>
+
+                  {/* Şu Anki Eğitim Durumu */}
+                  <div className="py-2.5">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                      Şu Anki Eğitim Durumu
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">
+                      Lise Öğrencisi
+                    </span>
+                  </div>
+
+                  {/* Aktif Projeler */}
+                  <div className="pt-3">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block mb-2">
+                      Aktif Projeler
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {DATA.apps.map((app) => (
+                        <span
+                          key={app.id}
+                          className="px-2.5 py-1 text-xs font-mono font-bold border border-[#0A0A0A] bg-[#F5F4F0] text-[#0A0A0A]"
+                        >
+                          {app.name}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </section>
 
