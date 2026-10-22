@@ -4,7 +4,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { EMBLEM_DATA_URI } from './assets/emblem';
 import {
   Dumbbell,
   Clock,
