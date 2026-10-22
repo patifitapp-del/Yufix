@@ -32,6 +32,7 @@ export const DATA = {
   // Giriş Bilgileri
   name: "YUSUF TALIBOV",
   title: "Uygulama geliştiricisi. Yufixuz Studio kurucusu.",
+  emblem: "/favicon.png",
   
   // Profil Fotoğrafı:
   // Kendi fotoğrafınızın URL'sini veya dosya yolunu buraya yapıştırabilirsiniz.
@@ -234,12 +235,19 @@ export default function App() {
       {/* ================= ÜST MENÜ (TOP BAR CONTRACT) ================= */}
       <header className="sticky top-0 z-40 bg-[#F5F4F0]/95 backdrop-blur-sm border-b border-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between gap-8">
-          {/* Zone 1: Brand Wordmark */}
+          {/* Zone 1: Brand Wordmark with Emblem */}
           <a
             href="#"
-            className="text-base sm:text-lg font-black tracking-tighter uppercase whitespace-nowrap shrink-0 hover:opacity-70 transition-opacity"
+            className="flex items-center gap-2.5 text-base sm:text-lg font-black tracking-tighter uppercase whitespace-nowrap shrink-0 hover:opacity-70 transition-opacity"
           >
-            Yusuf Talibov
+            {DATA.emblem && (
+              <img
+                src={DATA.emblem}
+                alt="Yufixuz Studio"
+                className="w-6 h-6 object-contain border border-[#0A0A0A] bg-[#F5F4F0]"
+              />
+            )}
+            <span>Yusuf Talibov</span>
           </a>
 
           {/* Zone 2: Navigation Links */}
@@ -698,8 +706,15 @@ export default function App() {
       {/* ================= ALTBİLGİ (FOOTER) ================= */}
       <footer className="border-t border-[#0A0A0A] py-8 bg-[#F5F4F0]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#555555]">
-          <div>
-            {DATA.footerText}
+          <div className="flex items-center gap-2">
+            {DATA.emblem && (
+              <img
+                src={DATA.emblem}
+                alt="Yufixuz Studio"
+                className="w-4 h-4 object-contain border border-[#0A0A0A]/40"
+              />
+            )}
+            <span>{DATA.footerText}</span>
           </div>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-[#0A0A0A] transition-colors">
