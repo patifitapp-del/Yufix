@@ -22,7 +22,7 @@ import {
 
 /**
  * =======================================================================
- * YUSUF TALIBOV — KİŞİSEL PORTFOLYO VERİLERİ (DATA)
+ * YUSUF TOLIBOV — KİŞİSEL PORTFOLYO VERİLERİ (DATA)
  * 
  * Tüm site içeriği bu tek nesne üzerinden yönetilir.
  * Yeni bir uygulama veya başarı eklemek için aşağıdaki dizilere bir satır
@@ -31,16 +31,16 @@ import {
  */
 export const DATA = {
   // Giriş Bilgileri
-  name: "YUSUF TALIBOV",
+  name: "YUSUF TOLIBOV",
   title: "Uygulama geliştiricisi. Yufixuz Studio kurucusu.",
   emblem: EMBLEM_DATA_URI,
   
-  // Profil Fotoğrafı (Kişisel fotoğraf kaldırıldı; boş bırakıldığında stüdyo amblemi kartı görüntülenir)
+  // Profil Fotoğrafı (Kişisel fotoğraf kaldırıldı; stüdyo amblemi ve bilgi kartı görüntülenir)
   photo: "",
   
   // Hakkımda Metni
   about: [
-    "Merhaba, ben Yusuf Talibov; 15 yaşındayım. Yaklaşık 2 yıldır yazılım, kodlama ve yapay zeka ile aktif olarak ilgileniyorum ve 14 yaşımda ilk uygulamamı geliştirdim. Hiçbir kursa gitmeden, tamamen kendi kendime araştırıp öğrenerek kod yazıyorum; yapay zekayı en verimli şekilde kullanarak App Store uygulamaları ve modern web sitesi tasarımları yapıyorum.",
+    "Merhaba, ben Yusuf Tolibov; 15 yaşındayım. Yaklaşık 2 yıldır yazılım, kodlama ve yapay zeka ile aktif olarak ilgileniyorum ve 14 yaşımda ilk uygulamamı geliştirdim. Hiçbir kursa gitmeden, tamamen kendi kendime araştırıp öğrenerek kod yazıyorum; yapay zekayı en verimli şekilde kullanarak App Store uygulamaları ve modern web sitesi tasarımları yapıyorum.",
     "Şu anda stüdyom Yufixuz Studio çatısı altında 4 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit neredeyse yayınlanmak üzere (hemen aşağıdan detaylarını inceleyebilirsiniz). Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
     "Bir yandan yazılım geliştirirken bir yandan sporumu aksatmıyor, okul derslerimi başarıyla sürdürüyorum. Tüm bu disiplini ve projelerimi elbette her an yanımda olan ailemin desteği sayesinde hayata geçiriyorum."
   ],
@@ -145,19 +145,19 @@ export const DATA = {
     },
     {
       name: "GitHub",
-      handle: "yusuftalibov",
+      handle: "yusuftolibov",
       url: "", // Boş bırakıldığı için otomatik gizlenir; link eklendiğinde görünür
       icon: "github"
     }
   ],
   
   // Altbilgi
-  footerText: "© 2026 Yusuf Talibov · Yufixuz Studio"
+  footerText: "© 2026 Yusuf Tolibov · Yufixuz Studio"
 };
 
-// Uygulama ikon haritası (minimalist monokrom çizgiler)
+// Uygulama ikon haritası (minimalist monokrom mat beyaz çizgiler)
 function renderAppIcon(iconKey: string) {
-  const iconProps = { className: "w-6 h-6 stroke-[1.5] text-[#0A0A0A]" };
+  const iconProps = { className: "w-6 h-6 stroke-[1.5] text-[#F5F4F0]" };
   switch (iconKey) {
     case 'fitness':
       return <Dumbbell {...iconProps} />;
@@ -249,45 +249,45 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F4F0] text-[#0A0A0A] font-sans paper-texture selection:bg-[#0A0A0A] selection:text-[#F5F4F0]">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F4F0] font-sans paper-texture selection:bg-[#F5F4F0] selection:text-[#0A0A0A]">
       {/* ================= ÜST MENÜ (TOP BAR CONTRACT) ================= */}
-      <header className="sticky top-0 z-40 bg-[#F5F4F0]/95 backdrop-blur-sm border-b border-[#0A0A0A]">
+      <header className="sticky top-0 z-40 bg-[#0A0A0A]/95 backdrop-blur-sm border-b border-[#262626]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between gap-8">
           {/* Zone 1: Brand Wordmark with Emblem */}
           <a
             href="#"
-            className="flex items-center gap-2.5 text-base sm:text-lg font-black tracking-tighter uppercase whitespace-nowrap shrink-0 hover:opacity-70 transition-opacity"
+            className="flex items-center gap-2.5 text-base sm:text-lg font-black tracking-tighter uppercase whitespace-nowrap shrink-0 text-[#F5F4F0] hover:opacity-75 transition-opacity"
           >
             {DATA.emblem && (
               <img
                 src={DATA.emblem}
                 alt="Yufixuz Studio"
-                className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0"
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0 invert"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/logo.png';
                 }}
               />
             )}
-            <span>Yusuf Talibov</span>
+            <span>Yusuf Tolibov</span>
           </a>
 
           {/* Zone 2: Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-semibold text-[#555555]">
-            <a href="#hakkimda" className="editorial-link hover:text-[#0A0A0A] transition-colors">
+          <nav className="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-semibold text-[#A3A3A3]">
+            <a href="#hakkimda" className="editorial-link hover:text-[#F5F4F0] transition-colors">
               Hakkımda
             </a>
-            <a href="#uygulamalar" className="editorial-link hover:text-[#0A0A0A] transition-colors">
+            <a href="#uygulamalar" className="editorial-link hover:text-[#F5F4F0] transition-colors">
               Uygulamalar
             </a>
-            <a href="#basarilar" className="editorial-link hover:text-[#0A0A0A] transition-colors">
+            <a href="#basarilar" className="editorial-link hover:text-[#F5F4F0] transition-colors">
               Zaman Çizelgesi
             </a>
             {activeSocials.length > 0 && (
-              <a href="#sosyal" className="editorial-link hover:text-[#0A0A0A] transition-colors">
+              <a href="#sosyal" className="editorial-link hover:text-[#F5F4F0] transition-colors">
                 Sosyal
               </a>
             )}
-            <a href="#iletisim" className="editorial-link hover:text-[#0A0A0A] transition-colors">
+            <a href="#iletisim" className="editorial-link hover:text-[#F5F4F0] transition-colors">
               İletişim
             </a>
           </nav>
@@ -297,7 +297,7 @@ export default function App() {
             {DATA.email && (
               <a
                 href={`mailto:${DATA.email}`}
-                className="px-4 py-2 text-xs uppercase font-bold tracking-wider bg-[#0A0A0A] text-[#F5F4F0] hover:bg-neutral-800 transition-colors whitespace-nowrap"
+                className="px-4 py-2 text-xs uppercase font-bold tracking-wider bg-[#F5F4F0] text-[#0A0A0A] hover:bg-white transition-colors whitespace-nowrap"
               >
                 İletişime Geç
               </a>
@@ -307,7 +307,7 @@ export default function App() {
           {/* Mobil Menü Butonu */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#0A0A0A] hover:opacity-70"
+            className="md:hidden p-2 text-[#F5F4F0] hover:opacity-70"
             aria-label="Menüyü aç/kapat"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -316,25 +316,25 @@ export default function App() {
 
         {/* Mobil Navigasyon Paneli */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#0A0A0A] bg-[#F5F4F0] px-6 py-5 flex flex-col gap-4 text-xs uppercase font-bold tracking-wider">
+          <div className="md:hidden border-t border-[#262626] bg-[#0A0A0A] px-6 py-5 flex flex-col gap-4 text-xs uppercase font-bold tracking-wider text-[#F5F4F0]">
             <a
               href="#hakkimda"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-1 hover:text-neutral-600"
+              className="py-1 hover:text-[#A3A3A3]"
             >
               Hakkımda
             </a>
             <a
               href="#uygulamalar"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-1 hover:text-neutral-600"
+              className="py-1 hover:text-[#A3A3A3]"
             >
               Uygulamalar
             </a>
             <a
               href="#basarilar"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-1 hover:text-neutral-600"
+              className="py-1 hover:text-[#A3A3A3]"
             >
               Zaman Çizelgesi
             </a>
@@ -342,7 +342,7 @@ export default function App() {
               <a
                 href="#sosyal"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-neutral-600"
+                className="py-1 hover:text-[#A3A3A3]"
               >
                 Sosyal Medya
               </a>
@@ -350,7 +350,7 @@ export default function App() {
             <a
               href="#iletisim"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-1 hover:text-neutral-600"
+              className="py-1 hover:text-[#A3A3A3]"
             >
               İletişim
             </a>
@@ -361,24 +361,24 @@ export default function App() {
       {/* Ana Konteyner */}
       <main className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* ================= BÖLÜM 1: GİRİŞ (HERO) ================= */}
-        <section className="pt-16 sm:pt-24 pb-16 md:pb-24 border-b border-[#0A0A0A]">
+        <section className="pt-16 sm:pt-24 pb-16 md:pb-24 border-b border-[#262626]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-            {/* Sol / Ana Alan: Ekranı kaplayan dev başlık ve açıklama */}
+            {/* Sol / Ana Alan: Ekranı kaplayan dev mat beyaz başlık ve açıklama */}
             <div className="space-y-8 lg:col-span-7 xl:col-span-8">
               <div className="space-y-4">
-                <span className="text-xs uppercase tracking-widest font-mono text-[#555555] block">
+                <span className="text-xs uppercase tracking-widest font-mono text-[#888888] block">
                   Portfolyo · 2026
                 </span>
                 
-                {/* Çok büyük, 900 ağırlıkta başlık - açılışta yumuşak belirme */}
-                <h1 className="animate-fade-in text-5xl sm:text-7xl md:text-8xl xl:text-[7.25rem] font-black uppercase tracking-tighter leading-[0.88] text-[#0A0A0A] text-balance break-words">
+                {/* Çok büyük, 900 ağırlıkta mat beyaz başlık - açılışta yumuşak belirme */}
+                <h1 className="animate-fade-in text-5xl sm:text-7xl md:text-8xl xl:text-[7.25rem] font-black uppercase tracking-tighter leading-[0.88] text-[#F5F4F0] text-balance break-words">
                   {DATA.name}
                 </h1>
               </div>
 
               {/* Alt Metin */}
               {DATA.title && (
-                <p className="animate-fade-in-delayed text-lg sm:text-xl md:text-2xl font-medium tracking-tight text-[#333333] max-w-2xl leading-snug">
+                <p className="animate-fade-in-delayed text-lg sm:text-xl md:text-2xl font-medium tracking-tight text-[#D4D4D4] max-w-2xl leading-snug">
                   {DATA.title}
                 </p>
               )}
@@ -387,7 +387,7 @@ export default function App() {
               <div className="pt-2 flex flex-wrap items-center gap-6 text-xs uppercase font-bold tracking-wider">
                 <a
                   href="#uygulamalar"
-                  className="editorial-link inline-flex items-center gap-1.5 text-[#0A0A0A]"
+                  className="editorial-link inline-flex items-center gap-1.5 text-[#F5F4F0] hover:opacity-80"
                 >
                   <span>Uygulamaları Keşfet</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -396,7 +396,7 @@ export default function App() {
                 {DATA.email && (
                   <a
                     href={`mailto:${DATA.email}`}
-                    className="editorial-link inline-flex items-center gap-1.5 text-[#555555] hover:text-[#0A0A0A]"
+                    className="editorial-link inline-flex items-center gap-1.5 text-[#888888] hover:text-[#F5F4F0]"
                   >
                     <Mail className="w-3.5 h-3.5" />
                     <span>{DATA.email}</span>
@@ -405,78 +405,78 @@ export default function App() {
               </div>
             </div>
 
-            {/* Sağ Alan: Sade Kimlik ve Bilgi Kartı ("İkinci şey") */}
+            {/* Sağ Alan: Sade Kimlik ve Bilgi Kartı ("İkinci şey") - Koyu mat tema */}
             <div className="lg:col-span-5 xl:col-span-4 lg:pt-2">
-              <div className="border border-[#0A0A0A] bg-[#EFECE6] p-6 sm:p-7 relative shadow-[4px_4px_0px_0px_#0A0A0A]">
+              <div className="border border-[#262626] bg-[#121212] p-6 sm:p-7 relative shadow-[4px_4px_0px_0px_#262626]">
                 {/* 1. Logo (Amblem) */}
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#F5F4F0] border border-[#0A0A0A] p-2 flex items-center justify-center shrink-0">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#1A1A1A] border border-[#262626] p-2 flex items-center justify-center shrink-0">
                     <img
                       src={DATA.emblem}
                       alt="Logo"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain invert"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = '/assets/aistudio/image_e2250dd1.png';
                       }}
                     />
                   </div>
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#555555] font-bold">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#888888] font-bold">
                     Yufixuz Studio
                   </span>
                 </div>
 
                 {/* Sadece İstenen 5 Bilgi */}
-                <div className="divide-y divide-[#0A0A0A]/20 text-sm">
+                <div className="divide-y divide-[#262626] text-sm">
                   {/* İsim Soyisim */}
                   <div className="pb-3">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#737373] block">
                       İsim Soyisim
                     </span>
-                    <span className="text-base sm:text-lg font-black tracking-tight text-[#0A0A0A]">
-                      Yusuf Talibov
+                    <span className="text-base sm:text-lg font-black tracking-tight text-[#F5F4F0]">
+                      Yusuf Tolibov
                     </span>
                   </div>
 
                   {/* Yaş */}
                   <div className="py-2.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#737373] block">
                       Yaş
                     </span>
-                    <span className="text-sm sm:text-base font-bold font-mono text-[#0A0A0A]">
+                    <span className="text-sm sm:text-base font-bold font-mono text-[#F5F4F0]">
                       15
                     </span>
                   </div>
 
                   {/* Meslek */}
                   <div className="py-2.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#737373] block">
                       Meslek
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">
+                    <span className="text-xs sm:text-sm font-semibold text-[#F5F4F0]">
                       Bağımsız Yazılım ve Mobil Uygulama Geliştiricisi
                     </span>
                   </div>
 
                   {/* Şu Anki Eğitim Durumu */}
                   <div className="py-2.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#737373] block">
                       Şu Anki Eğitim Durumu
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">
+                    <span className="text-xs sm:text-sm font-semibold text-[#F5F4F0]">
                       Lise Öğrencisi
                     </span>
                   </div>
 
                   {/* Aktif Projeler */}
                   <div className="pt-3">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] block mb-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#737373] block mb-2">
                       Aktif Projeler
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {DATA.apps.map((app) => (
                         <span
                           key={app.id}
-                          className="px-2.5 py-1 text-xs font-mono font-bold border border-[#0A0A0A] bg-[#F5F4F0] text-[#0A0A0A]"
+                          className="px-2.5 py-1 text-xs font-mono font-bold border border-[#262626] bg-[#1A1A1A] text-[#F5F4F0]"
                         >
                           {app.name}
                         </span>
@@ -491,25 +491,25 @@ export default function App() {
 
         {/* ================= BÖLÜM 2: HAKKIMDA ================= */}
         {DATA.about && (
-          <section id="hakkimda" className="py-20 md:py-28 border-b border-[#0A0A0A]">
+          <section id="hakkimda" className="py-20 md:py-28 border-b border-[#262626]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
               <div className="md:col-span-4">
-                <span className="text-xs uppercase font-mono tracking-widest text-[#555555] block mb-2">
+                <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
                   01 / Özet
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#0A0A0A]">
+                <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#F5F4F0]">
                   Hakkımda
                 </h2>
               </div>
               <div className="md:col-span-8 space-y-6">
                 {Array.isArray(DATA.about) ? (
                   DATA.about.map((paragraph, idx) => (
-                    <p key={idx} className="text-lg sm:text-xl md:text-2xl font-light text-[#0A0A0A] leading-relaxed tracking-tight text-balance">
+                    <p key={idx} className="text-lg sm:text-xl md:text-2xl font-light text-[#D4D4D4] leading-relaxed tracking-tight text-balance">
                       {paragraph}
                     </p>
                   ))
                 ) : (
-                  <p className="text-lg sm:text-xl md:text-2xl font-light text-[#0A0A0A] leading-relaxed tracking-tight text-balance">
+                  <p className="text-lg sm:text-xl md:text-2xl font-light text-[#D4D4D4] leading-relaxed tracking-tight text-balance">
                     {DATA.about}
                   </p>
                 )}
@@ -520,50 +520,50 @@ export default function App() {
 
         {/* ================= BÖLÜM 3: UYGULAMALARIM ================= */}
         {DATA.apps && DATA.apps.length > 0 && (
-          <section id="uygulamalar" className="py-20 md:py-28 border-b border-[#0A0A0A]">
+          <section id="uygulamalar" className="py-20 md:py-28 border-b border-[#262626]">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
               <div>
-                <span className="text-xs uppercase font-mono tracking-widest text-[#555555] block mb-2">
+                <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
                   02 / Portfolyo
                 </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#0A0A0A]">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F5F4F0]">
                   Uygulamalarım
                 </h2>
               </div>
-              <span className="text-xs font-mono text-[#555555] tracking-wider uppercase">
+              <span className="text-xs font-mono text-[#888888] tracking-wider uppercase">
                 Toplam {DATA.apps.length} Proje
               </span>
             </div>
 
-            {/* Kartlar Izgarası: Keskin köşeli, ince siyah çizgi ayrımı */}
-            <div className="grid grid-cols-1 md:grid-cols-2 border border-[#0A0A0A]">
+            {/* Kartlar Izgarası: Keskin köşeli, koyu mat tema */}
+            <div className="grid grid-cols-1 md:grid-cols-2 border border-[#262626]">
               {DATA.apps.map((app, index) => {
                 const hasAppStoreLink = Boolean(app.appStoreUrl && app.appStoreUrl.trim() !== "");
                 return (
                   <div
                     key={app.id || index}
-                    className="p-8 sm:p-10 flex flex-col justify-between border-b md:odd:border-r border-[#0A0A0A] bg-[#F5F4F0] hover:bg-[#EFECE6] transition-colors"
+                    className="p-8 sm:p-10 flex flex-col justify-between border-b md:odd:border-r border-[#262626] bg-[#111111] hover:bg-[#161616] transition-colors"
                   >
                     <div>
                       {/* Üst Kısım: İkon ve Durum */}
                       <div className="flex items-center justify-between gap-4 mb-8">
-                        <div className="p-3 border border-[#0A0A0A] bg-[#F5F4F0]">
+                        <div className="p-3 border border-[#262626] bg-[#1A1A1A]">
                           {renderAppIcon(app.iconKey)}
                         </div>
                         {app.status && (
-                          <span className="text-xs font-mono tracking-wider uppercase text-[#333333] border-b border-[#0A0A0A] pb-0.5">
+                          <span className="text-xs font-mono tracking-wider uppercase text-[#A3A3A3] border-b border-[#262626] pb-0.5">
                             {app.status}
                           </span>
                         )}
                       </div>
 
                       {/* Başlık */}
-                      <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#0A0A0A] mb-3">
+                      <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#F5F4F0] mb-3">
                         {app.name}
                       </h3>
 
                       {/* Tek Cümle Açıklama */}
-                      <p className="text-base text-[#444444] leading-relaxed mb-8">
+                      <p className="text-base text-[#A3A3A3] leading-relaxed mb-8">
                         {app.description}
                       </p>
                     </div>
@@ -575,13 +575,13 @@ export default function App() {
                           href={app.appStoreUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-between w-full sm:w-auto gap-4 px-5 py-3 text-xs uppercase font-bold tracking-wider bg-[#0A0A0A] text-[#F5F4F0] hover:bg-neutral-800 transition-colors"
+                          className="inline-flex items-center justify-between w-full sm:w-auto gap-4 px-5 py-3 text-xs uppercase font-bold tracking-wider bg-[#F5F4F0] text-[#0A0A0A] hover:bg-white transition-colors"
                         >
                           <span>App Store'da İncele</span>
                           <ArrowUpRight className="w-4 h-4" />
                         </a>
                       ) : (
-                        <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#777777] border-t border-[#0A0A0A]/20">
+                        <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#737373] border-t border-[#262626]">
                           <span>iOS / Yufixuz Studio</span>
                           <span>{app.status}</span>
                         </div>
@@ -596,41 +596,41 @@ export default function App() {
 
         {/* ================= BÖLÜM 4: PROJELER VE BAŞARILAR (DİKEY ZAMAN ÇİZELGESİ) ================= */}
         {DATA.achievements && DATA.achievements.length > 0 && (
-          <section id="basarilar" className="py-20 md:py-28 border-b border-[#0A0A0A]">
+          <section id="basarilar" className="py-20 md:py-28 border-b border-[#262626]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
               <div className="lg:col-span-4">
-                <span className="text-xs uppercase font-mono tracking-widest text-[#555555] block mb-2">
+                <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
                   03 / Yolculuk
                 </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#0A0A0A]">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F5F4F0]">
                   Projeler ve Başarılar
                 </h2>
               </div>
               <div className="lg:col-span-8">
-                <p className="text-base sm:text-lg text-[#555555] max-w-xl">
+                <p className="text-base sm:text-lg text-[#888888] max-w-xl">
                   Geliştirme yolculuğumda kaydettiğim önemli adımlar ve üzerinde çalıştığım bağımsız projeler.
                 </p>
               </div>
             </div>
 
             {/* Dikey Zaman Çizelgesi */}
-            <div className="border-t border-[#0A0A0A]">
+            <div className="border-t border-[#262626]">
               {DATA.achievements.map((item, index) => (
                 <div
                   key={index}
-                  className="py-8 border-b border-[#0A0A0A] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline hover:bg-[#EFECE6]/50 transition-colors px-2 sm:px-4"
+                  className="py-8 border-b border-[#262626] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline hover:bg-[#141414] transition-colors px-2 sm:px-4"
                 >
                   {/* Yıl */}
                   <div className="md:col-span-3 flex items-center gap-3">
-                    <span className="w-2 h-2 bg-[#0A0A0A] inline-block shrink-0"></span>
-                    <span className="font-mono text-lg sm:text-xl font-bold tracking-tight text-[#0A0A0A]">
+                    <span className="w-2 h-2 bg-[#F5F4F0] inline-block shrink-0"></span>
+                    <span className="font-mono text-lg sm:text-xl font-bold tracking-tight text-[#F5F4F0]">
                       {item.year}
                     </span>
                   </div>
 
                   {/* Başarı Metni */}
                   <div className="md:col-span-9">
-                    <p className="text-lg sm:text-xl font-medium text-[#0A0A0A] leading-snug tracking-tight">
+                    <p className="text-lg sm:text-xl font-medium text-[#E5E5E5] leading-snug tracking-tight">
                       {item.text}
                     </p>
                   </div>
@@ -642,37 +642,37 @@ export default function App() {
 
         {/* ================= BÖLÜM 5: SOSYAL MEDYA ================= */}
         {activeSocials.length > 0 && (
-          <section id="sosyal" className="py-20 md:py-28 border-b border-[#0A0A0A]">
+          <section id="sosyal" className="py-20 md:py-28 border-b border-[#262626]">
             <div className="mb-12">
-              <span className="text-xs uppercase font-mono tracking-widest text-[#555555] block mb-2">
+              <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
                 04 / Topluluk
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#0A0A0A]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F5F4F0]">
                 Sosyal Medya
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#0A0A0A]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#262626]">
               {activeSocials.map((social, index) => (
                 <a
                   key={index}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-6 sm:p-8 flex flex-col justify-between border-b sm:odd:border-r lg:border-r border-[#0A0A0A] bg-[#F5F4F0] hover:bg-[#0A0A0A] hover:text-[#F5F4F0] transition-colors group"
+                  className="p-6 sm:p-8 flex flex-col justify-between border-b sm:odd:border-r lg:border-r border-[#262626] bg-[#111111] hover:bg-[#F5F4F0] hover:text-[#0A0A0A] text-[#F5F4F0] transition-colors group"
                 >
                   <div className="flex items-center justify-between gap-4 mb-10">
-                    <span className="text-[#0A0A0A] group-hover:text-[#F5F4F0] transition-colors">
+                    <span className="text-[#F5F4F0] group-hover:text-[#0A0A0A] transition-colors">
                       {renderSocialIcon(social.icon)}
                     </span>
-                    <ArrowUpRight className="w-4 h-4 opacity-40 group-hover:opacity-100 transition-opacity" />
+                    <ArrowUpRight className="w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:text-[#0A0A0A] transition-opacity" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-black uppercase tracking-tight mb-1">
+                    <h3 className="text-xl font-black uppercase tracking-tight mb-1 text-[#F5F4F0] group-hover:text-[#0A0A0A] transition-colors">
                       {social.name}
                     </h3>
                     {social.handle && (
-                      <span className="text-xs font-mono opacity-60">
+                      <span className="text-xs font-mono opacity-60 text-[#888888] group-hover:text-[#333333] transition-colors">
                         {social.handle}
                       </span>
                     )}
@@ -687,18 +687,18 @@ export default function App() {
         <section id="iletisim" className="py-20 md:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
-              <span className="text-xs uppercase font-mono tracking-widest text-[#555555] block mb-2">
+              <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
                 05 / Bağlantı
               </span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#0A0A0A] mb-6">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#F5F4F0] mb-6">
                 Birlikte Üretelim
               </h2>
-              <p className="text-base sm:text-lg text-[#555555] leading-relaxed max-w-md">
+              <p className="text-base sm:text-lg text-[#888888] leading-relaxed max-w-md">
                 Yeni bir uygulama fikri, iş birliği veya sadece selam vermek için istediğiniz zaman bana e-posta gönderebilirsiniz.
               </p>
 
               {DATA.phone && DATA.phone.trim() !== '' && (
-                <div className="mt-6 text-sm font-mono text-[#0A0A0A]">
+                <div className="mt-6 text-sm font-mono text-[#F5F4F0]">
                   Telefon: <a href={`tel:${DATA.phone}`} className="editorial-link font-bold">{DATA.phone}</a>
                 </div>
               )}
@@ -706,14 +706,14 @@ export default function App() {
 
             <div className="lg:col-span-7">
               {DATA.email && (
-                <div className="border border-[#0A0A0A] p-8 sm:p-12 bg-[#F5F4F0] space-y-8">
+                <div className="border border-[#262626] p-8 sm:p-12 bg-[#111111] space-y-8">
                   <div>
-                    <span className="text-xs uppercase font-mono text-[#555555] tracking-wider block mb-2">
+                    <span className="text-xs uppercase font-mono text-[#888888] tracking-wider block mb-2">
                       Doğrudan E-Posta
                     </span>
                     <a
                       href={`mailto:${DATA.email}`}
-                      className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-[#0A0A0A] break-all editorial-link"
+                      className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-[#F5F4F0] break-all editorial-link hover:text-white"
                     >
                       {DATA.email}
                     </a>
@@ -722,7 +722,7 @@ export default function App() {
                   <div className="pt-4 flex flex-wrap items-center gap-4">
                     <a
                       href={`mailto:${DATA.email}`}
-                      className="px-6 py-3.5 text-xs uppercase font-bold tracking-wider bg-[#0A0A0A] text-[#F5F4F0] hover:bg-neutral-800 transition-colors inline-flex items-center gap-2"
+                      className="px-6 py-3.5 text-xs uppercase font-bold tracking-wider bg-[#F5F4F0] text-[#0A0A0A] hover:bg-white transition-colors inline-flex items-center gap-2"
                     >
                       <Mail className="w-4 h-4" />
                       <span>E-Posta Gönder</span>
@@ -730,7 +730,7 @@ export default function App() {
 
                     <button
                       onClick={handleCopyEmail}
-                      className="px-6 py-3.5 text-xs uppercase font-bold tracking-wider border border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#EFECE6] transition-colors inline-flex items-center gap-2"
+                      className="px-6 py-3.5 text-xs uppercase font-bold tracking-wider border border-[#333333] text-[#F5F4F0] hover:bg-[#1A1A1A] transition-colors inline-flex items-center gap-2"
                     >
                       {copiedEmail ? (
                         <>
@@ -753,14 +753,14 @@ export default function App() {
       </main>
 
       {/* ================= ALTBİLGİ (FOOTER) ================= */}
-      <footer className="border-t border-[#0A0A0A] py-8 bg-[#F5F4F0]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#555555]">
+      <footer className="border-t border-[#262626] py-8 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#888888]">
           <div className="flex items-center gap-2">
             {DATA.emblem && (
               <img
                 src={DATA.emblem}
                 alt="Yufixuz Studio"
-                className="w-5 h-5 object-contain shrink-0"
+                className="w-5 h-5 object-contain shrink-0 invert"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/logo.png';
                 }}
@@ -769,7 +769,7 @@ export default function App() {
             <span>{DATA.footerText}</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-[#0A0A0A] transition-colors">
+            <a href="#" className="hover:text-[#F5F4F0] transition-colors">
               Başa Dön ↑
             </a>
           </div>
