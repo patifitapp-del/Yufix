@@ -2,8 +2,8 @@
 
 @layer base {
   :root {
-    --bg-paper: #F5F4F0;
-    --text-primary: #0A0A0A;
+    --bg-paper: #0A0A0A;
+    --text-primary: #F5F4F0;
   }
 
   body {
@@ -15,10 +15,10 @@
   }
 }
 
-/* Subtle organic paper texture */
+/* Subtle organic paper texture - dark matte inversion */
 .paper-texture {
-  background-color: #F5F4F0;
-  background-image: radial-gradient(rgba(10, 10, 10, 0.04) 1px, transparent 0);
+  background-color: #0A0A0A;
+  background-image: radial-gradient(rgba(245, 244, 240, 0.08) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
@@ -38,7 +38,7 @@
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: #0A0A0A;
+  background-color: #F5F4F0;
   transform-origin: bottom right;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
