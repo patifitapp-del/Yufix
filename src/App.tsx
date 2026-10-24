@@ -10,6 +10,7 @@ import {
   Clock,
   Calculator,
   Sparkles,
+  Gamepad2,
   ArrowUpRight,
   Mail,
   Copy,
@@ -46,7 +47,7 @@ export const DATA = {
   // Hakkımda Metni
   about: [
     "Merhaba, ben Yusuf Tolibov; 15 yaşındayım. Yaklaşık 2 yıldır yazılım, kodlama ve yapay zeka ile aktif olarak ilgileniyorum ve 14 yaşımda ilk uygulamamı geliştirdim. Hiçbir kursa gitmeden, tamamen kendi kendime araştırıp öğrenerek kod yazıyorum; yapay zekayı en verimli şekilde kullanarak App Store uygulamaları ve modern web sitesi tasarımları yapıyorum.",
-    "Şu anda stüdyom Yufixuz Studio çatısı altında 4 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit neredeyse yayınlanmak üzere (hemen aşağıdan detaylarını inceleyebilirsiniz). Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
+    "Şu anda stüdyom Yufixuz Studio çatısı altında 5 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit, App Store incelemesinde (hemen aşağıdan detaylarını inceleyebilirsiniz). Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
     "Bir yandan yazılım geliştirirken bir yandan sporumu aksatmıyor, okul derslerimi başarıyla sürdürüyorum. Tüm bu disiplini ve projelerimi elbette her an yanımda olan ailemin desteği sayesinde hayata geçiriyorum."
   ],
   
@@ -60,7 +61,7 @@ export const DATA = {
       id: "patifit",
       name: "PatiFit",
       description: "Kaslı kedi Pat ile adım adım spor yaptıran, lig ve seri sistemli fitness uygulaması.",
-      status: "Yakında App Store'da",
+      status: "App Store incelemesinde",
       appStoreUrl: "", // Boş bırakıldığında buton görünmez; link yazıldığında buton aktif olur
       iconKey: "fitness"
     },
@@ -83,10 +84,18 @@ export const DATA = {
     {
       id: "glow-upp",
       name: "Glow Upp",
-      description: "Fotoğraftan kalori takibi, su ve hedef takibi yapan kişisel gelişim uygulaması.",
+      description: "15 yaş ve üstü için kalori, antrenman ve “Ne yesem?” önerileri sunan spor uygulaması.",
       status: "Geliştiriliyor",
       appStoreUrl: "",
       iconKey: "glow"
+    },
+    {
+      id: "moto-kurye",
+      name: "Moto Kurye",
+      description: "Açık şehir haritasında motosikletle paket taşıdığın kurye oyunu.",
+      status: "Geliştiriliyor",
+      appStoreUrl: "",
+      iconKey: "game"
     }
   ],
   
@@ -101,19 +110,19 @@ export const DATA = {
       text: "Kendi başıma 10'dan fazla web sitesi geliştirdim; mobil uygulama geliştirmeyi ilk hedeflediğim dönem."
     },
     {
-      year: "2026",
+      year: "Ekim 2026",
       text: "Apple Developer Program'a kabul edildim."
     },
     {
-      year: "2026",
+      year: "Ekim 2026",
       text: "İlk uygulamam PatiFit'i App Store'a gönderdim."
     },
     {
-      year: "2026",
+      year: "Ekim 2026",
       text: "Yufixuz Studio'yu kurdum."
     },
     {
-      year: "2026",
+      year: "Ekim 2026",
       text: "\"Pat'in Öğrencisi\" animasyon dizisini başlattım, ilk bölümler Instagram'da binlerce izlenme aldı."
     },
     {
@@ -172,6 +181,8 @@ function renderAppIcon(iconKey: string) {
       return <Calculator {...iconProps} />;
     case 'glow':
       return <Sparkles {...iconProps} />;
+    case 'game':
+      return <Gamepad2 {...iconProps} />;
     default:
       return <Code2 {...iconProps} />;
   }
@@ -291,7 +302,7 @@ export default function App() {
                 }}
               />
             )}
-            <span>YufixUz</span>
+            <span lang="en">YufixUz</span>
           </a>
 
           {/* Zone 2: Navigation Links */}
@@ -468,7 +479,7 @@ export default function App() {
                     className="editorial-link inline-flex items-center gap-1.5 text-[#888888] hover:text-[#F5F4F0]"
                   >
                     <Mail className="w-3.5 h-3.5" />
-                    <span>{DATA.email}</span>
+                    <span className="normal-case">{DATA.email}</span>
                   </a>
                 )}
               </div>
@@ -489,7 +500,7 @@ export default function App() {
                       }}
                     />
                   </div>
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#888888] font-bold">
+                  <span lang="en" className="text-[11px] font-mono uppercase tracking-widest text-[#888888] font-bold">
                     Yufixuz Studio
                   </span>
                 </div>
@@ -842,7 +853,7 @@ export default function App() {
               )}
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-black uppercase tracking-wider text-[#F5F4F0]">
+                  <span lang="en" className="text-sm font-black uppercase tracking-wider text-[#F5F4F0]">
                     YufixUz
                   </span>
                   <span className="text-[10px] font-mono px-1.5 py-0.5 border border-[#333333] text-[#888888]">

@@ -1,9 +1,9 @@
-export type AnnouncementCategory = 'Tümü' | 'Mobil Uygulama' | 'Oyun' | 'Yapay Zekâ' | 'Araç & Verimlilik';
+export type AnnouncementCategory = 'Tümü' | 'Mobil Uygulama' | 'Oyun' | 'Video' | 'Stüdyo';
 
 export interface AnnouncementItem {
   id: string;
   title: string;
-  category: 'Mobil Uygulama' | 'Oyun' | 'Yapay Zekâ' | 'Araç & Verimlilik';
+  category: 'Mobil Uygulama' | 'Oyun' | 'Video' | 'Stüdyo';
   date: string;
   version: string;
   badge: string;

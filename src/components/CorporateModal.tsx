@@ -54,6 +54,10 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
     setIsSubmitting(true);
+    // Mesaj, ziyaretçinin kendi e-posta uygulamasında hazır olarak açılır
+    const subject = encodeURIComponent(`[yufixuz.com] ${formData.subject}`);
+    const body = encodeURIComponent(`${formData.message}\n\n${formData.name}\n${formData.email}`);
+    window.location.href = `mailto:yusuftalibov0892@icloud.com?subject=${subject}&body=${body}`;
     setTimeout(() => {
       setIsSubmitting(false);
       setFormSubmitted(true);
@@ -281,7 +285,7 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
                   2. Fikri Mülkiyet ve Telif Hakları
                 </h4>
                 <p>
-                  Sitede yer alan tüm logolar, amblemler, metinler, grafikler, oyun tasarımları, arayüz bileşenleri, kaynak kodları ve ticari unvanlar (PatiFit, Odak, Pawsy, Yufix Runner vb.) <strong>Yusuf Tolibov ve Yufixuz Studio</strong>&apos;ya aittir ve ulusal/uluslararası fikri mülkiyet kanunları ile korunmaktadır.
+                  Sitede yer alan tüm logolar, amblemler, metinler, grafikler, oyun tasarımları, arayüz bileşenleri, kaynak kodları ve ticari unvanlar (PatiFit, Glow Upp, Odak, Pawsy, Moto Kurye vb.) <strong>Yusuf Tolibov ve Yufixuz Studio</strong>&apos;ya aittir ve ulusal/uluslararası fikri mülkiyet kanunları ile korunmaktadır.
                 </p>
                 <p className="text-xs text-[#B5B5B5]">
                   Yazılı izin olmaksızın içeriğin kopyalanması, çoğaltılması, tersine mühendislikle çözümlenmesi veya ticari amaçla dağıtılması kesinlikle yasaktır.
@@ -366,14 +370,14 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
                   Yusuf Tolibov 15 yaşında olup yaklaşık iki yıldır yazılım, yapay zekâ modelleri ve mobil uygulama mimarileri üzerine yoğunlaşmaktadır. Hiçbir resmi kursa bağlı kalmadan, kendi araştırmaları, açık kaynak dokümantasyonlar ve modern yapay zekâ araçlarıyla 14 yaşında ilk uygulamasını kodlamıştır.
                 </p>
                 <p>
-                  <strong>Apple Developer Program</strong> bünyesinde aktif bir geliştirici olan Yusuf, stüdyosu çatısı altında fitness uygulaması <em>PatiFit</em>, odaklanma asistanı <em>Odak AI</em>, eğitim platformu <em>Pawsy Matematik</em> ve dinamik aksiyon oyunu <em>Yufix Runner 3D</em> projelerini eş zamanlı olarak büyütmektedir. Ayrıca TEKNOFEST için mini insansız denizaltı projeleri gibi ileri mühendislik alanlarında da Ar-Ge çalışmalarını sürdürmektedir.
+                  <strong>Apple Developer Program</strong> bünyesinde aktif bir geliştirici olan Yusuf, stüdyosu çatısı altında fitness uygulaması <em>PatiFit</em>, kalori ve antrenman uygulaması <em>Glow Upp</em>, ders çalışma uygulaması <em>Odak</em>, matematik uygulaması <em>Pawsy Matematik</em> ve kurye oyunu <em>Moto Kurye</em> üzerinde çalışmaktadır. Ayrıca TEKNOFEST için mini insansız denizaltı projeleri gibi ileri mühendislik alanlarında da Ar-Ge çalışmalarını sürdürmektedir.
                 </p>
 
                 <h4 className="text-base font-black uppercase text-[#F5F4F0] pt-2">
                   Teknoloji Altyapımız
                 </h4>
                 <p className="text-xs text-[#B5B5B5]">
-                  Projelerimizde Apple Swift, SwiftUI, TypeScript, React, Next.js, Node.js ve modern yapay zekâ API&apos;leri kullanılmaktadır. Kullanıcı gizliliğini ilk sıraya koyan, cihaz üzerinde (on-device) veri işleme felsefesini benimsiyoruz.
+                  Projelerimizde JavaScript, TypeScript, React, Capacitor, Supabase ve yapay zekâ araçları kullanılmaktadır.
                 </p>
               </div>
             </div>
@@ -454,10 +458,10 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
                     <div className="py-10 text-center space-y-3">
                       <CheckCircle2 className="w-12 h-12 text-[#F5F4F0] mx-auto animate-bounce" />
                       <h4 className="text-lg font-black uppercase text-[#F5F4F0]">
-                        Mesajınız Alındı!
+                        E-posta Uygulaman Açıldı
                       </h4>
                       <p className="text-xs text-[#A0A0A0] max-w-xs mx-auto">
-                        Talebiniz Yusuf Tolibov ve Yufixuz Studio ekibine ulaştırıldı. En kısa sürede belirttiğiniz e-posta adresine dönüş yapılacaktır.
+                        Mesajın e-posta uygulamanda hazır. Göndere bastığında bana ulaşır. Açılmadıysa doğrudan yusuftalibov0892@icloud.com adresine yazabilirsin.
                       </p>
                       <button
                         onClick={() => {
@@ -540,11 +544,11 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
                         className="w-full py-2.5 text-xs font-bold uppercase tracking-wider bg-[#F5F4F0] text-[#0A0A0A] hover:bg-white transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                       >
                         {isSubmitting ? (
-                          <span>Gönderiliyor...</span>
+                          <span>E-posta açılıyor...</span>
                         ) : (
                           <>
                             <Send className="w-3.5 h-3.5" />
-                            <span>Mesajı İlet</span>
+                            <span>E-postayla Gönder</span>
                           </>
                         )}
                       </button>

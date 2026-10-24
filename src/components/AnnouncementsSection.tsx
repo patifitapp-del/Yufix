@@ -5,8 +5,8 @@ import {
   Sparkles,
   Gamepad2,
   Smartphone,
-  Brain,
-  Wrench,
+  Clapperboard,
+  Building2,
   CheckCircle,
   Calendar,
   Layers,
@@ -25,8 +25,8 @@ export const AnnouncementsSection: React.FC = () => {
     'Tümü',
     'Mobil Uygulama',
     'Oyun',
-    'Yapay Zekâ',
-    'Araç & Verimlilik'
+    'Video',
+    'Stüdyo'
   ];
 
   const filteredItems =
@@ -40,10 +40,10 @@ export const AnnouncementsSection: React.FC = () => {
         return <Smartphone className="w-3.5 h-3.5" />;
       case 'Oyun':
         return <Gamepad2 className="w-3.5 h-3.5" />;
-      case 'Yapay Zekâ':
-        return <Brain className="w-3.5 h-3.5" />;
-      case 'Araç & Verimlilik':
-        return <Wrench className="w-3.5 h-3.5" />;
+      case 'Video':
+        return <Clapperboard className="w-3.5 h-3.5" />;
+      case 'Stüdyo':
+        return <Building2 className="w-3.5 h-3.5" />;
       default:
         return <Sparkles className="w-3.5 h-3.5" />;
     }
@@ -55,13 +55,13 @@ export const AnnouncementsSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
           <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
-            02 / Duyurular & Blog
+            02 / Duyurular
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F5F4F0]">
-            Uygulama & Oyun Vitrini
+            Stüdyodan Haberler
           </h2>
           <p className="text-sm sm:text-base text-[#888888] mt-2 max-w-xl">
-            Yufixuz Studio laboratuvarında geliştirilen yeni mobil uygulamalar, oyun sürümleri, güncellemeler ve geliştirici notları.
+            Yufixuz Studio’da üzerinde çalıştığım uygulamalar, oyunlar ve videolar.
           </p>
         </div>
 
@@ -233,7 +233,7 @@ export const AnnouncementsSection: React.FC = () => {
               {/* Specs & Architecture */}
               <div>
                 <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-3">
-                  Teknik Özellikler ve Mimari
+                  Bilgiler
                 </span>
                 <div className="border border-[#262626] divide-y divide-[#262626]">
                   {activeItem.fullDetails.specs.map((spec, idx) => (
@@ -248,7 +248,7 @@ export const AnnouncementsSection: React.FC = () => {
               {/* Changelog */}
               <div>
                 <span className="text-xs uppercase font-mono tracking-widest text-[#888888] block mb-2">
-                  Sürüm Değişiklik Günlüğü (Changelog)
+                  Son Durum
                 </span>
                 <ul className="space-y-1.5 text-xs text-[#B5B5B5]">
                   {activeItem.fullDetails.changelog.map((log, idx) => (
