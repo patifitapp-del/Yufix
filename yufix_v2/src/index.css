@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@font-face { font-family: "Display"; font-style: italic; font-weight: 800; font-display: swap; src: url(/fonts/barlow-condensed-latin-800-italic.woff2) format("woff2"); }
+@font-face { font-family: "Display"; font-style: italic; font-weight: 800; font-display: swap; src: url(/fonts/barlow-condensed-latin-ext-800-italic.woff2) format("woff2"); unicode-range: U+0100-024F; }
+@font-face { font-family: "Rubik"; font-weight: 400; font-display: swap; src: url(/fonts/rubik-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 400; font-display: swap; src: url(/fonts/rubik-latin-ext-400-normal.woff2) format("woff2"); unicode-range: U+0100-024F; }
+@font-face { font-family: "Rubik"; font-weight: 500; font-display: swap; src: url(/fonts/rubik-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 500; font-display: swap; src: url(/fonts/rubik-latin-ext-500-normal.woff2) format("woff2"); unicode-range: U+0100-024F; }
+@font-face { font-family: "Rubik"; font-weight: 700; font-display: swap; src: url(/fonts/rubik-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 700; font-display: swap; src: url(/fonts/rubik-latin-ext-700-normal.woff2) format("woff2"); unicode-range: U+0100-024F; }
+
+@theme {
+  --color-paper: #EFEFEC;
+  --color-ink: #111111;
+  --color-muted: #5C5C58;
+  --color-rule: #D4D4CF;
+  --color-red: #C8102E;
+  --color-night: #111111;
+  --color-night-muted: #A6A6A0;
+  --font-display: "Display", "Arial Narrow", sans-serif;
+  --font-sans: "Rubik", system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--color-red); color: #fff; }
+:focus-visible { outline: 3px solid var(--color-red); outline-offset: 3px; border-radius: 6px; }
+.display { font-family: var(--font-display); font-style: italic; font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; }
+.tnum { font-variant-numeric: tabular-nums; }
+.ad-slot { max-width: 1200px; margin: 0 auto; padding: 0 20px 24px; }
+
+/* Acilis: isim satirlari asagidan yukari, Pat ziplayarak gelir */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { display: block; animation: rise .9s cubic-bezier(.2,0,0,1) both; }
+  .rise-2 { animation-delay: .1s; }
+  .fade-in { animation: fade .8s cubic-bezier(.2,0,0,1) .35s both; }
+  .pop-in { animation: pop .7s cubic-bezier(.2,0,0,1) .45s both; }
+  .pat-bounce { animation: bounce .45s cubic-bezier(.2,0,0,1); }
+  .live-dot::after { content: ""; position: absolute; inset: 0; border-radius: 999px; background: var(--color-red); animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
+}
+@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; transform: translateY(12px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes pop { from { opacity: 0; transform: translateY(40px) scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes bounce { 0% { transform: translateY(0) } 40% { transform: translateY(-18px) } 100% { transform: translateY(0) } }
+@keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
+
+.press { transition: scale .15s ease-out, background-color .15s ease-out, color .15s ease-out; }
+.press:not(:disabled):active { scale: .96; }
+.scroll-x { scrollbar-width: none; }
+.scroll-x::-webkit-scrollbar { display: none; }
