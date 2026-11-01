@@ -85,7 +85,7 @@ export const CorporateModal: React.FC<CorporateModalProps> = ({
         <div className="flex items-center justify-between px-6 py-5 border-b border-rule bg-white">
           <div className="flex items-center gap-3">
             <img
-              src="/logo_transparent.png"
+              src="/img/emblem.png"
               alt="YufixUz"
               className="w-6 h-6 object-contain shrink-0"
               onError={(e) => {

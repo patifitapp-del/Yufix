@@ -79,14 +79,6 @@ export const DATA = {
   footer: '© 2026 Yusuf Tolibov · Yufixuz Studio',
 };
 
-// Pat'e dokununca degisen pozlar ve sozler
-const PAT_LINES: [string, string][] = [
-  ['wave', "Selam! Ben Pat, Yusuf'un ilk uygulamasının maskotuyum."],
-  ['flex', 'PatiFit şu an App Store incelemesinde. Yakında telefonunda!'],
-  ['cheer', "Benim bir dizim de var: Pat'in Öğrencisi. 11. bölüm yayında!"],
-  ['hips', 'Bir daha dokunursan en baştan anlatırım.'],
-];
-
 const NAV = [
   ['#uygulamalar', 'Uygulamalar'],
   ['#dizi', 'Dizi'],
@@ -100,7 +92,7 @@ function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-rule">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
         <a href="#" className="flex items-center gap-2.5 shrink-0" aria-label="Yufixuz Studio, başa dön">
-          <img src="/logo_transparent.png" alt="" className="w-8 h-8 object-contain" />
+          <img src="/img/emblem.png" alt="" className="w-8 h-8 object-contain" />
           <span lang="en" className="display text-2xl leading-none pt-0.5">Yufixuz</span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-[15px] font-medium text-muted" aria-label="Ana menü">
@@ -123,40 +115,18 @@ function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
   );
 }
 
-function Pat() {
-  const [i, setI] = useState(0);
-  const [k, setK] = useState(0);
-  const [pose, line] = PAT_LINES[i];
-  return (
-    <div className="pop-in relative w-[190px] sm:w-[240px] lg:w-[300px] shrink-0 pt-28 sm:pt-20">
-      <div role="status" aria-live="polite" className="absolute -top-2 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-[70%] w-[230px] sm:w-[250px] bg-white rounded-3xl sm:rounded-br-md px-5 py-4 text-[15px] leading-snug shadow-[0_10px_30px_-12px_rgba(17,17,17,.35)]">
-        {line}
-      </div>
-      <button
-        onClick={() => { setI((i + 1) % PAT_LINES.length); setK(k + 1); }}
-        className="block w-full cursor-pointer"
-        aria-label="Pat'e dokun, başka bir şey söylesin"
-      >
-        <img key={k} src={`/img/pat-${pose}.png`} alt="Kaslı kedi Pat" width={480} height={632} className={`w-full h-auto ${k ? 'pat-bounce' : ''}`} />
-      </button>
-      <p className="text-center text-sm text-muted mt-1">Pat'e dokun</p>
-    </div>
-  );
-}
-
 function Hero() {
   return (
     <section className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-10 sm:pt-16">
-      <div className="flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-4">
-        <div className="flex-1 min-w-0">
-          <h1 className="display text-[clamp(5.2rem,17vw,13.5rem)] leading-[0.8]">
+      <div>
+        <div className="min-w-0">
+          <h1 className="display text-[clamp(5.2rem,17vw,14rem)] leading-[0.8]">
             {DATA.name.map((w, n) => (
-              <span key={w} className="block overflow-hidden pb-[0.06em]"><span className={`rise ${n ? 'rise-2' : ''}`}>{w}</span></span>
+              <span key={w} className="block overflow-x-visible overflow-y-clip pb-[0.06em] pr-[0.1em]"><span className={`rise ${n ? 'rise-2' : ''}`}>{w}</span></span>
             ))}
           </h1>
           <p className="fade-in mt-6 max-w-[34ch] text-xl sm:text-2xl leading-snug text-ink/80">{DATA.title}</p>
         </div>
-        <div className="self-center lg:self-end"><Pat /></div>
       </div>
       <div className="fade-in mt-12 grid grid-cols-1 sm:grid-cols-3 border-t border-ink">
         {[
@@ -324,7 +294,7 @@ function Contact({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
       </ul>
       <footer className="mt-20 flex flex-col md:flex-row md:items-center justify-between gap-6 text-[15px] text-muted">
         <div className="flex items-center gap-3">
-          <img src="/logo_transparent.png" alt="" className="w-7 h-7 object-contain" />
+          <img src="/img/emblem.png" alt="" className="w-7 h-7 object-contain" />
           <span>{DATA.footer}</span>
         </div>
         <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Yasal">
