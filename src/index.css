@@ -79,6 +79,9 @@ body {
   .float { animation: float 7s ease-in-out infinite; }
   .float-2 { animation-delay: -2.3s; }
   .float-3 { animation-delay: -4.6s; }
+  .modal-fade { animation: fade-plain .25s ease-out both; }
+  .modal-pop { animation: pop .45s cubic-bezier(.2,0,0,1) both; }
+  .tab-in { animation: fade .45s cubic-bezier(.2,0,0,1) both; }
   .live-dot::after { content: ""; position: absolute; inset: 0; border-radius: 999px; background: currentColor; animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
 }
 @keyframes drift1 { to { transform: translate(14vw, 10vh) scale(1.1); } }
@@ -87,6 +90,8 @@ body {
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes fade { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes fade-plain { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: translateY(24px) scale(.98); } }
 @keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
 
 /* Kart: imlecin oldugu yerde isik */

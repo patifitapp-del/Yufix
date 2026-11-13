@@ -23,7 +23,7 @@ export const DATA = {
     icon: '/img/patifit-icon.png',
     status: "App Store'da",
     soon: 'Android yakında',
-    appStoreUrl: '', // App Store linki yazilinca buton cikar
+    appStoreUrl: 'https://apps.apple.com/tr/app/patifit-kedili-evde-spor/id6823540115?l=tr',
     text: 'Evde spor yapmayı her gün küçük görevlere bölen fitness uygulaması. Kaslı kedi Pat her hareketi önce gösteriyor, sonra seninle birlikte sayıyor.',
     highlights: [
       'Seviye testiyle başlayan, kişiye özel yol haritası',
@@ -379,7 +379,7 @@ export default function App() {
           <Contact onLegal={openLegal} />
         </main>
       </div>
-      <div className="legal-scope relative z-50">
+      <div className="relative z-50">
         <CorporateModal isOpen={modal} initialTab={tab} onClose={() => setModal(false)} />
       </div>
     </div>
