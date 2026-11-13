@@ -1,72 +1,66 @@
 /**
- * Yusuf Tolibov — kisisel site (yufixuz.com)
- * Tum icerik DATA nesnesinde. Yeni uygulama, bolum ya da basari eklemek icin
- * ilgili diziye bir satir eklemen yeterli. Bos birakilan linkler sitede gizlenir.
+ * Yufixuz Studio — kurumsal site (yufixuz.com)
+ * Tum icerik DATA nesnesinde. Bos birakilan linkler sitede gizlenir.
+ * Renk kurali: sitenin rengi gece mavisi + koyu mor-mavi isik. Uygulama renkleri
+ * (PatiFit kirmizisi, Glow Upp lavantasi) sadece kendi kartlarinin icinde kalir.
  */
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Mail, Copy, Check, Menu, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowUpRight, ArrowDown, Mail, Copy, Check, Menu, X, Apple } from 'lucide-react';
 import { CorporateModal, CorporateTab } from './components/CorporateModal';
 
 export const DATA = {
-  name: ['YUSUF', 'TOLIBOV'],
-  title: "15 yaşında, kendi kendine öğrenen uygulama geliştiricisi. Yufixuz Studio'nun kurucusu.",
   email: 'yusuftalibov0892@icloud.com',
+  tagline: 'Hareket ettiren, öğreten ve eğlendiren mobil uygulamalar geliştiren bağımsız bir stüdyo.',
 
-  about: [
-    'Merhaba, ben Yusuf Tolibov; 15 yaşındayım. Yaklaşık 2 yıldır yazılım, kodlama ve yapay zeka ile aktif olarak ilgileniyorum ve 14 yaşımda ilk uygulamamı geliştirdim. Hiçbir kursa gitmeden, tamamen kendi kendime araştırıp öğrenerek kod yazıyorum; yapay zekayı en verimli şekilde kullanarak App Store uygulamaları ve modern web sitesi tasarımları yapıyorum.',
-    "Şu anda stüdyom Yufixuz Studio çatısı altında 5 farklı proje üzerinde çalışıyorum; bunlardan ilki olan fitness uygulamam PatiFit, App Store incelemesinde. Apple Developer Program'a kabul edildim ve en büyük amacım insanların spor yapmasını, ders çalışmasını ve öğrenmesini eğlenceli hale getiren uygulamalar üretmek.",
-    'Bir yandan yazılım geliştirirken bir yandan sporumu aksatmıyor, okul derslerimi başarıyla sürdürüyorum. Tüm bu disiplini ve projelerimi elbette her an yanımda olan ailemin desteği sayesinde hayata geçiriyorum.',
+  facts: [
+    ['PatiFit', "App Store'da yayında"],
+    ["Pat'in Öğrencisi", '19 bölüm yayında'],
+    ['Diller', 'Türkçe, İngilizce, Arapça, Çince'],
   ],
 
-  // Vitrindeki uygulama
-  featured: {
+  patifit: {
     name: 'PatiFit',
     icon: '/img/patifit-icon.png',
-    status: 'App Store incelemesinde',
-    appStoreUrl: '', // link yazilinca "App Store'da indir" butonu cikar
-    text: 'Spor yapmayı her gün küçük görevlere bölen bir fitness uygulaması. Kısa bir seviye testinden sonra sana özel bir yol haritası çıkıyor; maskot kaslı kedi Pat her hareketi önce animasyonla gösteriyor, sonra sayaç seninle birlikte sayıyor.',
+    status: "App Store'da",
+    soon: 'Android yakında',
+    appStoreUrl: '', // App Store linki yazilinca buton cikar
+    text: 'Evde spor yapmayı her gün küçük görevlere bölen fitness uygulaması. Kaslı kedi Pat her hareketi önce gösteriyor, sonra seninle birlikte sayıyor.',
     highlights: [
-      'Seviye testiyle başlayan, sana özel yol haritası',
-      'Kamerayla şınav sayan canlı düellolar',
-      "XP, elmas, seri ve Bronz'dan Pro'ya ligler",
-      '4–12 yaş için ebeveyn kodlu çocuk modu',
-    ],
-    specs: [
-      ['Platform', 'iPhone'],
-      ['Diller', 'Türkçe, İngilizce, Arapça, Çince'],
-      ['Fiyat', 'Ücretsiz, uygulama içi satın alma var'],
+      'Seviye testiyle başlayan, kişiye özel yol haritası',
+      'Telefon kamerasıyla şınav sayan düellolar',
+      'Günlük seri, ligler ve ana ekran widget’ı',
+      'Ebeveyn kodlu çocuk modu',
     ],
     shots: ['/img/tr-06-yol.webp', '/img/tr-09-sayac.webp', '/img/tr-13-lig.webp'],
   },
 
-  // Yoldaki diger uygulamalar
-  apps: [
-    { name: 'Odak', text: 'Kırmızı panda Pawsy ile ders çalışma ve sınava hazırlık uygulaması.', status: 'Geliştiriliyor' },
-    { name: 'Pawsy Matematik', text: 'Çocuklar için açık dünyalı, gençler için yol haritalı matematik öğrenme uygulaması.', status: 'Geliştiriliyor' },
-    { name: 'Glow Upp', text: '15 yaş ve üstü için kalori, antrenman ve “Ne yesem?” önerileri sunan spor uygulaması.', status: 'Geliştiriliyor' },
-    { name: 'Moto Kurye', text: 'Açık şehir haritasında motosikletle paket taşıdığın kurye oyunu.', status: 'Geliştiriliyor' },
-  ],
+  glowupp: {
+    name: 'Glow Upp',
+    icon: '/img/glowupp-icon.png',
+    status: 'Yakında',
+    text: '15 yaş ve üstü için beslenme ve antrenman uygulaması. Fotoğrafla kalori takibi, yapay zekâ beslenme koçu Glowie ve sesli koşu koçu.',
+    chips: ['Fotoğrafla kalori', 'Glowie koç', 'Koşu koçu', 'Günlük rutin', 'Sağlıklı tarifler'],
+  },
 
   series: {
     name: "Pat'in Öğrencisi",
-    text: "Sınıfta herkesin dalga geçtiği Emre, PatiFit'i açınca Pat ona “Artık ben senin hocanım” diyor. Her bölümde Emre'nin forma girme macerası devam ediyor; seslendirme, animasyon ve kurgu stüdyoda yapılıyor.",
-    episodes: 11,
+    text: "Sınıfta herkesin dalga geçtiği Emre, PatiFit'i açınca Pat ona “Artık ben senin hocanım” diyor. Senaryo, seslendirme, animasyon ve kurgusu stüdyoda yapılan bir mini dizi; bölümlerin gidişatına izleyiciler karar veriyor.",
     stills: [
-      { src: '/img/ep1.jpg', label: 'Bölüm 8 · Rövanş' },
-      { src: '/img/ep2.jpg', label: 'Bölüm 10 · Yeni Ortak' },
-      { src: '/img/ep3.jpg', label: "Bölüm 11 · Deniz'in Sırrı" },
-      { src: '/img/ep4.jpg', label: 'Sen karar ver: A mı, B mi?' },
+      { src: '/img/ep1.jpg', label: 'Rövanş' },
+      { src: '/img/ep2.jpg', label: 'Yeni Ortak' },
+      { src: '/img/ep3.jpg', label: "Deniz'in Sırrı" },
+      { src: '/img/ep4.jpg', label: 'Sen karar ver' },
     ],
   },
 
-  timeline: [
-    ['2025 sonu', 'Yazılımla tanıştım; kodlama ve yapay zekayı kendi kendime öğrenmeye başladım.'],
-    ['2026 başı', "Kendi başıma 10'dan fazla web sitesi geliştirdim; mobil uygulamaya geçmeye karar verdim."],
-    ['Ekim 2026', "Apple Developer Program'a kabul edildim."],
-    ['Ekim 2026', "İlk uygulamam PatiFit'i App Store'a gönderdim."],
-    ['Ekim 2026', "Yufixuz Studio'yu kurdum."],
-    ['Ekim 2026', "“Pat'in Öğrencisi” animasyon dizisini başlattım; ilk bölümler Instagram'da binlerce izlenme aldı."],
-    ['2026', 'TEKNOFEST için insansız mini denizaltı projesi üzerinde çalışıyorum.'],
+  studio: [
+    'Yufixuz Studio, fikirden tasarıma, animasyondan yayına kadar her aşamayı kendi bünyesinde yürüten bağımsız bir mobil uygulama stüdyosu.',
+    'Amacımız spor yapmayı, öğrenmeyi ve sağlıklı yaşamayı eğlenceli hale getiren ürünler geliştirmek. Uygulamalarımızı Türkiye’den dünyaya, dört dilde yayınlıyoruz.',
+  ],
+  values: [
+    ['Önce eğlence', 'İnsanlar sevdikleri şeye geri döner. Her ürünü önce eğlenceli olsun diye tasarlıyoruz.'],
+    ['Herkes için', 'Çocuk modundan yaş kurallarına kadar, her yaşa uygun ve güvenli deneyim.'],
+    ['Gizliliğe saygı', 'Kamera görüntüsü telefonda işlenir, gereğinden fazla veri toplamayız.'],
   ],
 
   socials: [
@@ -74,32 +68,56 @@ export const DATA = {
     { name: 'TikTok', handle: '@patifitapp', url: 'https://www.tiktok.com/@patifitapp' },
     { name: 'YouTube', handle: '@patifitapp', url: 'https://youtube.com/@patifitapp' },
     { name: 'Facebook', handle: 'Yufixuz Studio', url: 'https://www.facebook.com/share/19hcLc1DG2/' },
-    { name: 'GitHub', handle: 'yusuftolibov', url: '' },
   ],
-  footer: '© 2026 Yusuf Tolibov · Yufixuz Studio',
+  footer: '© 2026 Yufixuz Studio',
 };
 
 const NAV = [
   ['#uygulamalar', 'Uygulamalar'],
   ['#dizi', 'Dizi'],
-  ['#hakkimda', 'Hakkımda'],
+  ['#studyo', 'Stüdyo'],
   ['#iletisim', 'İletişim'],
 ];
 
+/* Ekrana girince yumusakca belirme */
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('on')); return; }
+    const io = new IntersectionObserver((list) => list.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add('on'); io.unobserve(en.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, []);
+}
+/* Imlecin oldugu yerde kart icinde isik */
+const onSpot = (e: React.PointerEvent<HTMLElement>) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+};
+
 function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const f = () => setScrolled(window.scrollY > 12);
+    f(); window.addEventListener('scroll', f, { passive: true });
+    return () => window.removeEventListener('scroll', f);
+  }, []);
   return (
-    <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-rule">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
+    <header className={`sticky top-0 z-40 transition-colors duration-300 ${scrolled || open ? 'bg-night/70 backdrop-blur-xl border-b border-rule' : 'border-b border-transparent'}`}>
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-[72px] flex items-center justify-between gap-6">
         <a href="#" className="flex items-center gap-2.5 shrink-0" aria-label="Yufixuz Studio, başa dön">
-          <img src="/img/emblem.png" alt="" className="w-8 h-8 object-contain" />
+          <img src="/img/emblem-white.png" alt="" className="w-7 h-8 object-contain" />
           <span lang="en" className="display text-2xl leading-none pt-0.5">Yufixuz</span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-[15px] font-medium text-muted" aria-label="Ana menü">
           {NAV.map(([h, l]) => <a key={h} href={h} className="hover:text-ink transition-colors">{l}</a>)}
         </nav>
-        <a href={`mailto:${DATA.email}`} className="press hidden md:inline-flex items-center gap-2 h-10 px-5 rounded-full bg-ink text-paper text-sm font-medium hover:bg-red">
-          E-posta yaz
+        <a href={`mailto:${DATA.email}`} className="press hidden md:inline-flex items-center gap-2 h-10 px-5 rounded-full glass text-sm font-medium hover:border-white/20">
+          İletişime geç
         </a>
         <button onClick={() => setOpen(!open)} className="md:hidden -mr-2 w-11 h-11 grid place-items-center" aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'} aria-expanded={open}>
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -117,125 +135,147 @@ function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
 
 function Hero() {
   return (
-    <section className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-10 sm:pt-16">
-      <div>
-        <div className="min-w-0">
-          <h1 className="display text-[clamp(5.2rem,17vw,14rem)] leading-[0.8]">
-            {DATA.name.map((w, n) => (
-              <span key={w} className="block overflow-x-visible overflow-y-clip pb-[0.06em] pr-[0.1em]"><span className={`rise ${n ? 'rise-2' : ''}`}>{w}</span></span>
-            ))}
-          </h1>
-          <p className="fade-in mt-6 max-w-[34ch] text-xl sm:text-2xl leading-snug text-ink/80">{DATA.title}</p>
-        </div>
+    <section className="relative max-w-[1200px] mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-20 sm:pb-28">
+      <img src="/img/emblem-white.png" alt="" aria-hidden className="pointer-events-none select-none absolute right-2 sm:right-10 top-10 w-40 sm:w-72 opacity-[0.06] float" />
+      <h1 className="display text-[22vw] sm:text-[168px] leading-[0.82]">
+        <span className="block overflow-hidden"><span className="rise">Yufixuz</span></span>
+        <span className="block overflow-hidden"><span className="rise rise-2 bg-gradient-to-r from-ink via-[#C9C1FF] to-[#8FA8FF] bg-clip-text text-transparent pr-3">Studio</span></span>
+      </h1>
+      <p className="fade-in mt-8 max-w-[34ch] text-xl sm:text-2xl leading-snug text-ink/90">{DATA.tagline}</p>
+      <div className="fade-in mt-9 flex flex-wrap gap-3">
+        <a href="#uygulamalar" className="press inline-flex items-center gap-2 h-12 px-6 rounded-full bg-ink text-night font-medium hover:bg-white">
+          Uygulamaları gör <ArrowDown className="w-4 h-4" aria-hidden />
+        </a>
+        <a href={`mailto:${DATA.email}`} className="press inline-flex items-center gap-2 h-12 px-6 rounded-full glass font-medium hover:border-white/20">
+          <Mail className="w-4 h-4" aria-hidden /> İletişime geç
+        </a>
       </div>
-      <div className="fade-in mt-12 grid grid-cols-1 sm:grid-cols-3 border-t border-ink">
-        {[
-          ['PatiFit', DATA.featured.status, true],
-          ["Pat'in Öğrencisi", `${DATA.series.episodes} bölüm yayında`, false],
-          ['Yufixuz Studio', `${DATA.apps.length + 1} proje üzerinde çalışıyor`, false],
-        ].map(([a, b, live], n) => (
-          <div key={n} className={`py-5 ${n ? 'sm:pl-6 sm:border-l border-t sm:border-t-0 border-rule' : ''}`}>
-            <p className="text-sm text-muted">{a}</p>
-            <p className="mt-1 text-lg font-medium flex items-center gap-2.5">
-              {live && <span className="live-dot relative w-2.5 h-2.5 rounded-full bg-red shrink-0" />}
-              {b}
-            </p>
+      <dl className="fade-in mt-16 sm:mt-24 grid sm:grid-cols-3 gap-px rounded-2xl overflow-hidden border border-rule bg-rule">
+        {DATA.facts.map(([k, v]) => (
+          <div key={k} className="bg-night/80 backdrop-blur px-5 py-4">
+            <dt className="text-xs text-faint">{k}</dt>
+            <dd className="mt-1 font-medium">{v}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }
 
-function Featured() {
-  const f = DATA.featured;
+function PatiFitCard() {
+  const p = DATA.patifit;
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
-      <div>
-        <div className="flex items-center gap-5">
-          <img src={f.icon} alt="" width={88} height={88} className="w-[88px] h-[88px] rounded-[22px] shadow-[0_8px_24px_-10px_rgba(200,16,46,.6)]" />
-          <div>
-            <h3 lang="en" className="display text-6xl sm:text-7xl leading-none">{f.name}</h3>
-            <p className="mt-2 inline-flex items-center gap-2 text-[15px] font-medium text-red">
-              <span className="live-dot relative w-2 h-2 rounded-full bg-red" />{f.status}
-            </p>
+    <article onPointerMove={onSpot} style={{ ['--spot' as string]: 'rgba(200,16,46,.18)' }}
+      className="spot reveal lift relative overflow-hidden rounded-[32px] border border-rule bg-[#0E0A0D]">
+      {/* PatiFit'in kendi dunyasi: kirmizi isik sadece bu kartin icinde */}
+      <div aria-hidden className="absolute -right-24 -top-24 w-[420px] h-[420px] rounded-full bg-[#C8102E] opacity-25 blur-[100px]" />
+      <div aria-hidden className="absolute -left-20 bottom-[-140px] w-[340px] h-[340px] rounded-full bg-[#7A0A1C] opacity-30 blur-[100px]" />
+      <div className="relative grid lg:grid-cols-[1fr_1.05fr] gap-10 p-7 sm:p-12">
+        <div>
+          <div className="flex items-center gap-4">
+            <img src={p.icon} alt="" className="w-[72px] h-[72px] rounded-[20px] shadow-[0_10px_40px_rgba(200,16,46,.35)]" />
+            <div>
+              <h3 className="display text-5xl leading-none">{p.name}</h3>
+              <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                <span className="live-dot relative w-2 h-2 rounded-full bg-[#FF3B57] text-[#FF3B57]" aria-hidden />
+                <span className="text-[#FF8A9B] font-medium">{p.status}</span>
+                <span className="text-muted">· {p.soon}</span>
+              </p>
+            </div>
           </div>
+          <p className="mt-7 text-lg leading-relaxed text-ink/85 max-w-[46ch]">{p.text}</p>
+          <ul className="mt-6 space-y-2.5">
+            {p.highlights.map((h) => (
+              <li key={h} className="flex gap-3 text-[15px] text-ink/80">
+                <span className="mt-[9px] w-1.5 h-1.5 rounded-full bg-[#FF3B57] shrink-0" aria-hidden />{h}
+              </li>
+            ))}
+          </ul>
+          {p.appStoreUrl && (
+            <a href={p.appStoreUrl} target="_blank" rel="noreferrer" className="press mt-8 inline-flex items-center gap-2.5 h-12 px-6 rounded-full bg-ink text-night font-medium hover:bg-white">
+              <Apple className="w-5 h-5" aria-hidden /> App Store'dan indir
+            </a>
+          )}
         </div>
-        <p className="mt-7 text-lg leading-relaxed text-ink/80 max-w-[52ch]">{f.text}</p>
-        <ul className="mt-7 space-y-3">
-          {f.highlights.map((h) => (
-            <li key={h} className="flex gap-3 text-[17px]">
-              <svg className="w-5 h-5 mt-0.5 shrink-0 text-red" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              {h}
-            </li>
+        <div className="relative h-[420px] sm:h-[480px]" aria-label="PatiFit ekran görüntüleri">
+          {p.shots.map((s, i) => (
+            <img key={s} src={s} alt="" loading="lazy"
+              className={`float ${i === 1 ? 'float-2' : i === 2 ? 'float-3' : ''} absolute top-1/2 w-[38%] max-w-[190px] rounded-[26px] border border-white/15 shadow-[0_30px_60px_rgba(0,0,0,.55)]`}
+              style={{
+                left: i === 0 ? '4%' : i === 1 ? '31%' : '58%',
+                translate: `0 ${i === 1 ? '-56%' : '-44%'}`,
+                rotate: i === 0 ? '-6deg' : i === 2 ? '6deg' : '0deg',
+                zIndex: i === 1 ? 2 : 1,
+              }} />
           ))}
-        </ul>
-        <dl className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-rule pt-6">
-          {f.specs.map(([k, v]) => <div key={k}><dt className="text-sm text-muted">{k}</dt><dd className="mt-1 font-medium">{v}</dd></div>)}
-        </dl>
-        {f.appStoreUrl && (
-          <a href={f.appStoreUrl} target="_blank" rel="noopener noreferrer" className="press mt-8 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-ink text-paper font-medium hover:bg-red">
-            App Store'da indir <ArrowUpRight className="w-4 h-4" />
-          </a>
-        )}
+        </div>
       </div>
-      <div className="relative h-[420px] sm:h-[560px]" aria-label="PatiFit ekran görüntüleri">
-        {f.shots.map((s, n) => (
-          <div
-            key={s}
-            className="absolute top-1/2 left-1/2 w-[38%] sm:w-[46%] max-w-[240px] rounded-[30px] bg-ink p-[6px] shadow-[0_24px_50px_-20px_rgba(17,17,17,.55)]"
-            style={{ transform: `translate(calc(-50% + ${(n - 1) * 62}%), calc(-50% + ${n === 1 ? -4 : 6}%)) rotate(${(n - 1) * 6}deg)`, zIndex: n === 1 ? 3 : 1 }}
-          >
-            <img src={s} alt="" loading="lazy" width={420} height={908} className="w-full h-auto rounded-[24px] block" />
+    </article>
+  );
+}
+
+function GlowUppCard() {
+  const g = DATA.glowupp;
+  return (
+    <article onPointerMove={onSpot} style={{ ['--spot' as string]: 'rgba(169,155,255,.22)' }}
+      className="spot reveal lift relative overflow-hidden rounded-[32px] border border-rule bg-[#F6F4FF] text-[#141225]">
+      {/* Glow Upp'in kendi dunyasi: beyaz zemin + lavanta parilti */}
+      <div aria-hidden className="absolute -left-24 -top-28 w-[420px] h-[420px] rounded-full bg-[#A99BFF] opacity-60 blur-[90px]" />
+      <div aria-hidden className="absolute right-[-120px] bottom-[-120px] w-[320px] h-[320px] rounded-full bg-[#FF9EC4] opacity-25 blur-[100px]" />
+      <div className="relative p-7 sm:p-12 grid md:grid-cols-[auto_1fr] gap-8 items-center">
+        <img src={g.icon} alt="" className="float w-28 h-28 sm:w-36 sm:h-36 rounded-[30px] shadow-[0_20px_50px_rgba(91,71,224,.35)]" />
+        <div>
+          <div className="flex flex-wrap items-center gap-3">
+            <h3 className="display text-5xl leading-none">{g.name}</h3>
+            <span className="text-sm font-medium px-3 py-1 rounded-full bg-[#5B47E0] text-white">{g.status}</span>
           </div>
-        ))}
+          <p className="mt-5 text-lg leading-relaxed text-[#141225]/80 max-w-[52ch]">{g.text}</p>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {g.chips.map((c) => (
+              <li key={c} className="text-sm font-medium px-3.5 py-1.5 rounded-full bg-white/70 border border-white text-[#3A2F8F]">{c}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 function Apps() {
   return (
-    <section id="uygulamalar" className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-28 sm:pt-36">
-      <h2 className="display text-6xl sm:text-8xl leading-[0.85] mb-14">Uygulamalar</h2>
-      <Featured />
-      <h3 className="mt-24 text-lg font-medium text-muted">Sırada olanlar</h3>
-      <ul className="mt-4 border-t border-ink">
-        {DATA.apps.map((a) => (
-          <li key={a.name} className="grid grid-cols-1 md:grid-cols-[minmax(0,20rem)_1fr_auto] gap-x-10 gap-y-2 items-baseline py-7 border-b border-rule">
-            <span lang={a.name === 'Moto Kurye' ? 'tr' : 'en'} className="display text-4xl sm:text-5xl leading-none">{a.name}</span>
-            <span className="text-[17px] leading-relaxed text-ink/75 max-w-[56ch]">{a.text}</span>
-            <span className="text-sm text-muted whitespace-nowrap">{a.status}</span>
-          </li>
-        ))}
-      </ul>
+    <section id="uygulamalar" className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+      <h2 className="reveal display text-6xl sm:text-8xl leading-[0.9]">Uygulamalar</h2>
+      <p className="reveal mt-4 text-muted text-lg max-w-[48ch]">Her ürünün kendi karakteri, kendi rengi var.</p>
+      <div className="mt-12 space-y-6">
+        <PatiFitCard />
+        <GlowUppCard />
+      </div>
     </section>
   );
 }
 
 function Series() {
   const s = DATA.series;
-  const links = DATA.socials.filter((x) => x.url && ['Instagram', 'TikTok', 'YouTube'].includes(x.name));
   return (
-    <section id="dizi" className="mt-28 sm:mt-36 bg-night text-paper py-24 sm:py-32">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-center">
+    <section id="dizi" className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+      <div className="reveal glass rounded-[32px] p-7 sm:p-12 grid lg:grid-cols-[1fr_1.4fr] gap-10 items-center">
         <div>
-          <p className="text-[15px] text-night-muted">Animasyon dizisi · {s.episodes} bölüm</p>
-          <h2 className="display text-6xl sm:text-8xl leading-[0.85] mt-3">{s.name}</h2>
-          <p className="mt-7 text-lg leading-relaxed text-paper/80 max-w-[46ch]">{s.text}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            {links.map((l) => (
-              <a key={l.name} href={l.url} target="_blank" rel="noopener noreferrer" className="press inline-flex items-center gap-2 h-11 px-5 rounded-full border border-paper/25 text-[15px] font-medium hover:bg-paper hover:text-ink">
-                {l.name}{({ Instagram: "'da", TikTok: "'ta", YouTube: "'da" } as Record<string, string>)[l.name]} izle <ArrowUpRight className="w-4 h-4" />
+          <p className="text-sm text-muted">Stüdyo yapımı animasyon dizisi</p>
+          <h2 className="mt-2 display text-6xl sm:text-7xl leading-[0.88]">{s.name}</h2>
+          <p className="mt-6 text-ink/80 leading-relaxed max-w-[46ch]">{s.text}</p>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {DATA.socials.slice(0, 3).map((x) => (
+              <a key={x.name} href={x.url} target="_blank" rel="noreferrer" className="press inline-flex items-center gap-1.5 h-10 px-4 rounded-full border border-rule text-sm font-medium hover:border-white/25">
+                {x.name}’da izle <ArrowUpRight className="w-4 h-4" aria-hidden />
               </a>
             ))}
           </div>
         </div>
-        <div className="scroll-x -mx-5 px-5 sm:mx-0 sm:px-0 flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 sm:scroll-pl-0">
-          {s.stills.map((e) => (
-            <figure key={e.src} className="snap-start shrink-0 w-[58%] sm:w-[calc(33.333%-11px)] lg:w-[calc(33.333%-11px)]">
-              <img src={e.src} alt={e.label} loading="lazy" width={480} height={853} className="w-full h-auto rounded-2xl outline outline-1 -outline-offset-1 outline-white/10" />
-              <figcaption className="mt-3 text-sm text-night-muted">{e.label}</figcaption>
+        <div className="flex gap-3 overflow-x-auto scroll-x snap-x -mx-2 px-2 pb-1">
+          {s.stills.map((st, i) => (
+            <figure key={st.src} className={`snap-start shrink-0 w-[46%] sm:w-[30%] ${i % 2 ? 'mt-8' : ''}`}>
+              <img src={st.src} alt={`${s.name}: ${st.label}`} loading="lazy" className="w-full aspect-[9/14] object-cover rounded-2xl border border-rule" />
+              <figcaption className="mt-2 text-sm text-muted">{st.label}</figcaption>
             </figure>
           ))}
         </div>
@@ -244,62 +284,66 @@ function Series() {
   );
 }
 
-function About() {
+function Studio() {
   return (
-    <section id="hakkimda" className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-28 sm:pt-36">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-16">
-        <h2 className="display text-6xl sm:text-8xl leading-[0.85]">Hakkımda</h2>
-        <div className="space-y-6 text-xl leading-relaxed text-ink/85 max-w-[60ch]">
-          {DATA.about.map((p, n) => <p key={n}>{p}</p>)}
+    <section id="studyo" className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+      <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10">
+        <h2 className="reveal display text-6xl sm:text-8xl leading-[0.88]">Stüdyo</h2>
+        <div className="reveal space-y-5 text-lg leading-relaxed text-ink/85">
+          {DATA.studio.map((p) => <p key={p}>{p}</p>)}
         </div>
       </div>
-      <h3 className="mt-24 text-lg font-medium text-muted">Yolculuk</h3>
-      <ol className="mt-4 border-t border-ink">
-        {DATA.timeline.map(([y, t], n) => (
-          <li key={n} className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-10 gap-y-1 py-5 border-b border-rule">
-            <span className="text-[15px] font-medium text-muted tnum">{y}</span>
-            <span className="text-lg leading-snug">{t}</span>
-          </li>
+      <div className="mt-14 grid md:grid-cols-3 gap-4">
+        {DATA.values.map(([t, d]) => (
+          <div key={t} onPointerMove={onSpot} className="spot reveal lift glass rounded-3xl p-7">
+            <h3 className="text-xl font-medium">{t}</h3>
+            <p className="mt-3 text-muted leading-relaxed">{d}</p>
+          </div>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }
 
 function Contact({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
   const [copied, setCopied] = useState(false);
-  const socials = DATA.socials.filter((s) => s.url);
-  const copy = () => { navigator.clipboard?.writeText(DATA.email); setCopied(true); setTimeout(() => setCopied(false), 2200); };
+  const t = useRef<number | undefined>(undefined);
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(DATA.email); setCopied(true); window.clearTimeout(t.current); t.current = window.setTimeout(() => setCopied(false), 1800); } catch { /* kopyalama desteklenmiyor */ }
+  };
   return (
-    <section id="iletisim" className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-28 sm:pt-36 pb-16">
-      <h2 className="display text-[clamp(4rem,12vw,9.5rem)] leading-[0.82]">Birlikte<br />üretelim</h2>
-      <p className="mt-7 text-xl leading-relaxed text-ink/80 max-w-[44ch]">Yeni bir uygulama fikri, iş birliği ya da sadece selam vermek için bana yazabilirsin.</p>
-      <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-        <a href={`mailto:${DATA.email}`} className="press inline-flex items-center gap-3 h-14 px-7 rounded-full bg-ink text-paper text-base sm:text-lg font-medium hover:bg-red">
-          <Mail className="w-5 h-5 shrink-0" />{DATA.email}
+    <section id="iletisim" className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-10">
+      <h2 className="reveal display text-[18vw] sm:text-[150px] leading-[0.82]">Birlikte<br />üretelim</h2>
+      <p className="reveal mt-7 text-lg text-ink/80 max-w-[44ch]">İş birliği, reklam, basın ya da sadece bir fikir için bize yazın.</p>
+      <div className="reveal mt-8 flex flex-wrap gap-3">
+        <a href={`mailto:${DATA.email}`} className="press inline-flex items-center gap-2 h-12 px-6 rounded-full bg-ink text-night font-medium hover:bg-white">
+          <Mail className="w-4 h-4" aria-hidden /> {DATA.email}
         </a>
-        <button onClick={copy} className="press inline-flex items-center justify-center gap-2 h-14 px-6 rounded-full border border-ink/25 font-medium hover:bg-ink/5">
-          {copied ? <><Check className="w-5 h-5" />Kopyalandı</> : <><Copy className="w-5 h-5" />Adresi kopyala</>}
+        <button onClick={copy} className="press inline-flex items-center gap-2 h-12 px-5 rounded-full glass font-medium hover:border-white/20" aria-live="polite">
+          {copied ? <><Check className="w-4 h-4" aria-hidden /> Kopyalandı</> : <><Copy className="w-4 h-4" aria-hidden /> Adresi kopyala</>}
         </button>
       </div>
-      <ul className="mt-20 grid grid-cols-2 md:grid-cols-4 border-t border-ink">
-        {socials.map((s) => (
+      <ul className="reveal mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-rule">
+        {DATA.socials.filter((s) => s.url).map((s) => (
           <li key={s.name} className="border-b border-rule">
-            <a href={s.url} target="_blank" rel="noopener noreferrer" className="group flex items-start justify-between gap-3 py-6 pr-4">
-              <span><span className="block text-xl font-medium">{s.name}</span><span className="text-[15px] text-muted">{s.handle}</span></span>
-              <ArrowUpRight className="w-5 h-5 mt-1 text-muted group-hover:text-red transition-colors" />
+            <a href={s.url} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-2 py-5 pr-4">
+              <span>
+                <span className="block font-medium">{s.name}</span>
+                <span className="block text-sm text-muted">{s.handle}</span>
+              </span>
+              <ArrowUpRight className="w-5 h-5 text-muted group-hover:text-ink group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition" aria-hidden />
             </a>
           </li>
         ))}
       </ul>
-      <footer className="mt-20 flex flex-col md:flex-row md:items-center justify-between gap-6 text-[15px] text-muted">
-        <div className="flex items-center gap-3">
-          <img src="/img/emblem.png" alt="" className="w-7 h-7 object-contain" />
+      <footer className="mt-14 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-sm text-muted">
+        <div className="flex items-center gap-2.5">
+          <img src="/img/emblem-white.png" alt="" className="w-5 h-6 object-contain opacity-80" />
           <span>{DATA.footer}</span>
         </div>
         <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Yasal">
-          {([['privacy', 'Gizlilik Politikası'], ['terms', 'Kullanım Koşulları'], ['about', 'Hakkımızda'], ['contact', 'İletişim ve Destek']] as [CorporateTab, string][]).map(([t, l]) => (
-            <button key={t} onClick={() => onLegal(t)} className="hover:text-ink transition-colors">{l}</button>
+          {([['privacy', 'Gizlilik Politikası'], ['terms', 'Kullanım Koşulları'], ['about', 'Hakkımızda'], ['contact', 'İletişim ve Destek']] as [CorporateTab, string][]).map(([k, l]) => (
+            <button key={k} onClick={() => onLegal(k)} className="hover:text-ink transition-colors">{l}</button>
           ))}
         </nav>
       </footer>
@@ -311,6 +355,7 @@ export default function App() {
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState<CorporateTab>('privacy');
   const openLegal = (t: CorporateTab) => { setTab(t); setModal(true); };
+  useReveal();
 
   // Eski linkler calismaya devam etsin: #gizlilik, #kullanim-kosullari, #hakkimizda, #destek
   useEffect(() => {
@@ -321,16 +366,22 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-clip">
-      <Header onLegal={openLegal} />
-      <main>
-        <Hero />
-        <Apps />
-        <Series />
-        <About />
-        <Contact onLegal={openLegal} />
-      </main>
-      <CorporateModal isOpen={modal} initialTab={tab} onClose={() => setModal(false)} />
+    <div className="relative min-h-screen overflow-x-clip">
+      <div className="aurora" aria-hidden><i className="a1" /><i className="a2" /><i className="a3" /></div>
+      <div className="grain" aria-hidden />
+      <div className="relative z-10">
+        <Header onLegal={openLegal} />
+        <main>
+          <Hero />
+          <Apps />
+          <Series />
+          <Studio />
+          <Contact onLegal={openLegal} />
+        </main>
+      </div>
+      <div className="legal-scope relative z-50">
+        <CorporateModal isOpen={modal} initialTab={tab} onClose={() => setModal(false)} />
+      </div>
     </div>
   );
 }
