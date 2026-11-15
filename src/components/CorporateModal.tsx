@@ -10,7 +10,7 @@ interface CorporateModalProps {
 }
 
 const EMAIL = 'yusuftalibov0892@icloud.com';
-const UPDATED = '14 Kasım 2026';
+export const UPDATED = '14 Kasım 2026';
 
 const TABS: { key: CorporateTab; label: string; Icon: typeof Shield }[] = [
   { key: 'privacy', label: 'Gizlilik', Icon: Shield },
@@ -20,7 +20,7 @@ const TABS: { key: CorporateTab; label: string; Icon: typeof Shield }[] = [
 ];
 
 /* Baslik + paragraf blogu */
-function Block({ title, children }: { title: string; children: React.ReactNode }) {
+export function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="py-6 border-t border-rule first:border-t-0 first:pt-0">
       <h3 className="text-lg font-medium text-ink">{title}</h3>
@@ -32,7 +32,7 @@ const A = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#C9C1FF] underline decoration-white/25 underline-offset-4 hover:decoration-[#C9C1FF]">{children}</a>
 );
 
-function Privacy() {
+export function Privacy() {
   return (
     <>
       <Block title="Kısaca">
@@ -55,7 +55,7 @@ function Privacy() {
   );
 }
 
-function Terms() {
+export function Terms() {
   return (
     <>
       <Block title="Kabul">

@@ -6,7 +6,7 @@
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, ArrowDown, Mail, Copy, Check, Menu, X, Apple } from 'lucide-react';
-import { CorporateModal, CorporateTab } from './components/CorporateModal';
+import { POSTS, fmtDate } from './content/blog';
 
 export const DATA = {
   email: 'yusuftalibov0892@icloud.com',
@@ -14,7 +14,7 @@ export const DATA = {
 
   facts: [
     ['PatiFit', "App Store'da yayında"],
-    ["Pat'in Öğrencisi", '19 bölüm yayında'],
+    ["Pat'in Öğrencisi", '20 bölüm yayında'],
     ['Diller', 'Türkçe, İngilizce, Arapça, Çince'],
   ],
 
@@ -72,15 +72,16 @@ export const DATA = {
   footer: '© 2026 Yufixuz Studio',
 };
 
-const NAV = [
-  ['#uygulamalar', 'Uygulamalar'],
-  ['#dizi', 'Dizi'],
-  ['#studyo', 'Stüdyo'],
-  ['#iletisim', 'İletişim'],
+export const NAV = [
+  ['/#uygulamalar', 'Uygulamalar'],
+  ['/pat-in-ogrencisi', 'Dizi'],
+  ['/blog', 'Blog'],
+  ['/hakkimizda', 'Stüdyo'],
+  ['/iletisim', 'İletişim'],
 ];
 
 /* Ekrana girince yumusakca belirme */
-function useReveal() {
+export function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('on')); return; }
@@ -92,13 +93,13 @@ function useReveal() {
   }, []);
 }
 /* Imlecin oldugu yerde kart icinde isik */
-const onSpot = (e: React.PointerEvent<HTMLElement>) => {
+export const onSpot = (e: React.PointerEvent<HTMLElement>) => {
   const r = e.currentTarget.getBoundingClientRect();
   e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
   e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
 };
 
-function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
+export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -109,7 +110,7 @@ function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
   return (
     <header className={`sticky top-0 z-40 transition-colors duration-300 ${scrolled || open ? 'bg-night/70 backdrop-blur-xl border-b border-rule' : 'border-b border-transparent'}`}>
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-[72px] flex items-center justify-between gap-6">
-        <a href="#" className="flex items-center gap-2.5 shrink-0" aria-label="Yufixuz Studio, başa dön">
+        <a href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Yufixuz Studio, ana sayfa">
           <img src="/img/emblem-white.png" alt="" className="w-7 h-8 object-contain" />
           <span lang="en" className="display text-2xl leading-none pt-0.5">Yufixuz</span>
         </a>
@@ -126,7 +127,7 @@ function Header({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
       {open && (
         <div className="md:hidden border-t border-rule px-5 py-4 flex flex-col">
           {NAV.map(([h, l]) => <a key={h} href={h} onClick={() => setOpen(false)} className="display text-4xl py-2">{l}</a>)}
-          <button onClick={() => { setOpen(false); onLegal('privacy'); }} className="text-left text-sm text-muted py-3">Gizlilik ve koşullar</button>
+          <a href="/gizlilik" className="text-sm text-muted py-3">Gizlilik ve koşullar</a>
         </div>
       )}
     </header>
@@ -162,7 +163,7 @@ function Hero() {
   );
 }
 
-function PatiFitCard() {
+export function PatiFitCard() {
   const p = DATA.patifit;
   return (
     <article onPointerMove={onSpot} style={{ ['--spot' as string]: 'rgba(200,16,46,.18)' }}
@@ -196,6 +197,9 @@ function PatiFitCard() {
               <Apple className="w-5 h-5" aria-hidden /> App Store'dan indir
             </a>
           )}
+          <a href="/patifit" className="press mt-8 ml-3 inline-flex items-center gap-2 h-12 px-6 rounded-full glass font-medium hover:border-white/20">
+            Detaylı incele <ArrowUpRight className="w-4 h-4" aria-hidden />
+          </a>
         </div>
         <div className="relative h-[420px] sm:h-[480px]" aria-label="PatiFit ekran görüntüleri">
           {p.shots.map((s, i) => (
@@ -214,7 +218,7 @@ function PatiFitCard() {
   );
 }
 
-function GlowUppCard() {
+export function GlowUppCard() {
   const g = DATA.glowupp;
   return (
     <article onPointerMove={onSpot} style={{ ['--spot' as string]: 'rgba(169,155,255,.22)' }}
@@ -235,6 +239,9 @@ function GlowUppCard() {
               <li key={c} className="text-sm font-medium px-3.5 py-1.5 rounded-full bg-white/70 border border-white text-[#3A2F8F]">{c}</li>
             ))}
           </ul>
+          <a href="/glow-upp" className="press mt-7 inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#141225] text-white text-sm font-medium hover:bg-[#2a2550]">
+            Glow Upp hakkında <ArrowUpRight className="w-4 h-4" aria-hidden />
+          </a>
         </div>
       </div>
     </article>
@@ -264,6 +271,7 @@ function Series() {
           <h2 className="mt-2 display text-6xl sm:text-7xl leading-[0.88]">{s.name}</h2>
           <p className="mt-6 text-ink/80 leading-relaxed max-w-[46ch]">{s.text}</p>
           <div className="mt-7 flex flex-wrap gap-2">
+            <a href="/pat-in-ogrencisi" className="press inline-flex items-center gap-1.5 h-10 px-4 rounded-full bg-ink text-night text-sm font-medium hover:bg-white">Diziyi tanı</a>
             {DATA.socials.slice(0, 3).map((x) => (
               <a key={x.name} href={x.url} target="_blank" rel="noreferrer" className="press inline-flex items-center gap-1.5 h-10 px-4 rounded-full border border-rule text-sm font-medium hover:border-white/25">
                 {x.name}’da izle <ArrowUpRight className="w-4 h-4" aria-hidden />
@@ -305,7 +313,7 @@ function Studio() {
   );
 }
 
-function Contact({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
+export function Contact() {
   const [copied, setCopied] = useState(false);
   const t = useRef<number | undefined>(undefined);
   const copy = async () => {
@@ -336,52 +344,54 @@ function Contact({ onLegal }: { onLegal: (t: CorporateTab) => void }) {
           </li>
         ))}
       </ul>
-      <footer className="mt-14 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-sm text-muted">
-        <div className="flex items-center gap-2.5">
-          <img src="/img/emblem-white.png" alt="" className="w-5 h-6 object-contain opacity-80" />
-          <span>{DATA.footer}</span>
-        </div>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Yasal">
-          {([['privacy', 'Gizlilik Politikası'], ['terms', 'Kullanım Koşulları'], ['about', 'Hakkımızda'], ['contact', 'İletişim ve Destek']] as [CorporateTab, string][]).map(([k, l]) => (
-            <button key={k} onClick={() => onLegal(k)} className="hover:text-ink transition-colors">{l}</button>
-          ))}
-        </nav>
-      </footer>
     </section>
   );
 }
 
-export default function App() {
-  const [modal, setModal] = useState(false);
-  const [tab, setTab] = useState<CorporateTab>('privacy');
-  const openLegal = (t: CorporateTab) => { setTab(t); setModal(true); };
-  useReveal();
-
-  // Eski linkler calismaya devam etsin: #gizlilik, #kullanim-kosullari, #hakkimizda, #destek
-  useEffect(() => {
-    const map: Record<string, CorporateTab> = { '#gizlilik': 'privacy', '#kullanim-kosullari': 'terms', '#kosullar': 'terms', '#hakkimizda': 'about', '#iletisim-destek': 'contact', '#destek': 'contact' };
-    const h = () => { const t = map[window.location.hash]; if (t) openLegal(t); };
-    h(); window.addEventListener('hashchange', h);
-    return () => window.removeEventListener('hashchange', h);
-  }, []);
-
+/* Bloğun son yazilari: ana sayfada */
+function Journal() {
   return (
-    <div className="relative min-h-screen overflow-x-clip">
-      <div className="aurora" aria-hidden><i className="a1" /><i className="a2" /><i className="a3" /></div>
-      <div className="grain" aria-hidden />
-      <div className="relative z-10">
-        <Header onLegal={openLegal} />
-        <main>
-          <Hero />
-          <Apps />
-          <Series />
-          <Studio />
-          <Contact onLegal={openLegal} />
-        </main>
+    <section id="blog" className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <h2 className="reveal display text-6xl sm:text-8xl leading-[0.9]">Blog</h2>
+          <p className="reveal mt-4 text-muted text-lg max-w-[48ch]">Evde spor, alışkanlıklar ve stüdyodan notlar.</p>
+        </div>
+        <a href="/blog" className="reveal press inline-flex items-center gap-2 h-11 px-5 rounded-full glass text-sm font-medium hover:border-white/20">
+          Tüm yazılar <ArrowUpRight className="w-4 h-4" aria-hidden />
+        </a>
       </div>
-      <div className="relative z-50">
-        <CorporateModal isOpen={modal} initialTab={tab} onClose={() => setModal(false)} />
+      <div className="mt-12 grid md:grid-cols-3 gap-4">
+        {POSTS.slice(0, 3).map((p) => <PostCard key={p.slug} p={p} />)}
       </div>
-    </div>
+    </section>
+  );
+}
+
+export function PostCard({ p }: { p: (typeof POSTS)[number] }) {
+  return (
+    <a href={`/blog/${p.slug}`} onPointerMove={onSpot} className="spot reveal lift glass group flex flex-col rounded-3xl overflow-hidden">
+      <div className="aspect-[16/10] overflow-hidden bg-deep">
+        <img src={p.cover} alt="" loading="lazy" className="w-full h-full object-cover opacity-90 group-hover:scale-[1.03] transition-transform duration-700" />
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <p className="text-sm text-muted">{p.cat} · {fmtDate(p.date)}</p>
+        <h3 className="mt-2 text-xl font-medium leading-snug">{p.title}</h3>
+        <p className="mt-3 text-muted leading-relaxed line-clamp-3">{p.desc}</p>
+      </div>
+    </a>
+  );
+}
+
+export function Home() {
+  return (
+    <>
+      <Hero />
+      <Apps />
+      <Series />
+      <Journal />
+      <Studio />
+      <Contact />
+    </>
   );
 }
